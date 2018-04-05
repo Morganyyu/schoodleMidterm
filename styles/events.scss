@@ -40,6 +40,7 @@ body h2 {
   padding-top: 50px;
 }
 
+
 .div-class {
   height: 50px;
   width: 100px;
@@ -48,22 +49,39 @@ body h2 {
 
 /* rowspan, colspan html attributes if you need them */
 .event-table {
-  margin-left: 200px;
+  margin-left: 250px;
   width: 30%;
-  background: white;
+  background: #F7F4EF;
   td, th {
-    border: 2px solid grey;
+    border: 1px solid grey;
     width: 50px;
   }
   td:first-child, th:first-child {
+    border-radius: 5px;
     width: auto;
   }
 border: 1px solid black;
-border-radius: 2px;
+border-radius: 5px;
 }
 
+.random {
+  opacity: 0;
+}
+
+.icon:hover .random{
+  opacity: 1;
+}
+
+input[type=checkbox]
+{
+  -webkit-transform: scale(1.8);
+  margin-left: 12px;
+  margin-top: 5px;
+}
+
+
 td:hover {
-  background-color: lightgreen;
+  background-color: lightblue;
 }
 
 .event-table:hover{

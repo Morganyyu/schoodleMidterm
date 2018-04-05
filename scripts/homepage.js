@@ -1,5 +1,5 @@
 $(function () {
 
-
+$(.add).on("click", () )
 
 })

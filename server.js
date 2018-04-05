@@ -56,10 +56,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.post("/events", (req,res) => {
-  res.redirect("/events");
-})
-
 app.get("/events", (req, res) => {
 
   res.render("events");
@@ -68,7 +64,7 @@ app.get("/events", (req, res) => {
 app.post("/events", (req, res) => {
 	console.log('post /events')
     knex('events').insert({
-      
+
       event_name: req.body.title,
       event_url:generateRandomString(),
       details: req.body.details,
@@ -81,7 +77,15 @@ app.post("/events", (req, res) => {
     .catch((err)=>{
      throw err;
     })
-    
+    knex('timeslots').insert({
+      time: (req.body.)
+    }).then(() => {
+      console.log('success for timeslots this is so great weeeeeeeeeeeeeee')
+    })
+    .catch((err)=>{
+     throw err;
+    })
+
    res.render("events");
 });
 

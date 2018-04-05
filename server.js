@@ -25,6 +25,19 @@ app.use(morgan('dev'));
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
+
+// generateRandomString function
+function generateRandomString() {
+  let output = "";
+  let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (var i = 0; i < 10; i++)
+  output += possible.charAt(Math.floor(Math.random() * possible.length));
+  return output;
+};
+
+
+
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
@@ -52,11 +65,11 @@ app.post("/events", (req, res) => {
 	console.log('post /events')
     knex('events').insert({
       
-      event_name: `Sam's Birthday!`,
-      details: `Everyone come to Sam's Bday party at Sam's House`,
-      event_url: 'http://localhost:8080/123456789',
-      sched_name: 'Sam Schantz',
-      sched_email: 'samvschantz@gmail.com'
+      event_name: req.body.title,
+      event_url:generateRandomString(),
+      details: req.body.details,
+      sched_name: req.body.name,
+      sched_email: req.body.email
     }).then(() => {
       //res.sendStatus(200);
       console.log('success')
@@ -64,6 +77,7 @@ app.post("/events", (req, res) => {
     .catch((err)=>{
      throw err;
     })
+    
    res.render("events");
 });
 

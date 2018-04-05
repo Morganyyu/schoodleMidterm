@@ -36,12 +36,16 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Mount all resource routes
-// app.use("/api/users", usersRoutes(knex));
+app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
 });
+
+app.post("/events", (req,res) => {
+  res.redirect("/events");
+})
 
 app.get("/events", (req, res) => {
   res.render("events");

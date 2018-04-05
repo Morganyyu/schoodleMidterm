@@ -36,7 +36,7 @@ body {
 
 body h2 {
   color: #244751;
-  padding-left: 400px;
+  text-align:center;
   padding-top: 50px;
 }
 
@@ -49,7 +49,8 @@ body h2 {
 
 /* rowspan, colspan html attributes if you need them */
 .event-table {
-  margin-left: 250px;
+  margin-left: auto;
+  margin-right: auto;
   width: 30%;
   background: #F7F4EF;
   td, th {
@@ -88,15 +89,6 @@ td:hover {
   cursor: pointer;
 }
 
-
-header {
-    height:80px;
-    background:#E77753;
-    border:1px solid #E77753;
-    width:960px;
-    margin:0px auto;
-}
-
 body p {
-  padding-left: 400px;
+  text-align:center;
 }

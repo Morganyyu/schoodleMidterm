@@ -36,9 +36,10 @@ body {
 
 body h2 {
   color: #244751;
-  padding-left: 400px;
+  text-align:center;
   padding-top: 50px;
 }
+
 
 .div-class {
   height: 50px;
@@ -48,37 +49,46 @@ body h2 {
 
 /* rowspan, colspan html attributes if you need them */
 .event-table {
-  margin-left: 200px;
+  margin-left: auto;
+  margin-right: auto;
   width: 30%;
-  background: white;
+  background: #F7F4EF;
   td, th {
-    border: 2px solid grey;
+    border: 1px solid grey;
     width: 50px;
   }
   td:first-child, th:first-child {
+    border-radius: 5px;
     width: auto;
   }
 border: 1px solid black;
-border-radius: 2px;
+border-radius: 5px;
 }
 
+.random {
+  opacity: 0;
+}
+
+.icon:hover .random{
+  opacity: 1;
+}
+
+input[type=checkbox]
+{
+  -webkit-transform: scale(1.8);
+  margin-left: 12px;
+  margin-top: 5px;
+}
+
+
 td:hover {
-  background-color: lightgreen;
+  background-color: lightblue;
 }
 
 .event-table:hover{
   cursor: pointer;
 }
 
-
-header {
-    height:80px;
-    background:#E77753;
-    border:1px solid #E77753;
-    width:960px;
-    margin:0px auto;
-}
-
 body p {
-  padding-left: 400px;
+  text-align:center;
 }

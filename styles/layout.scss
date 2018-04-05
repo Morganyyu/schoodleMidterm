@@ -1,4 +1,4 @@
-* {border: 1px solid red}
+/** {border: 1px solid red}*/
 
 nav {
   background-color: #e77753;
@@ -41,6 +41,29 @@ body {
 .new-event {
   font-family: 'Oswald', sans-serif;
   background-color: #f7f4ef;
+  border-radius: 6px;
+
+  input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #e3a94b;
+    padding: 2px 5px;
+  }
+
+  textarea {
+    background: transparent;
+    overflow: hidden;
+    border: none;
+    border-bottom: 1px solid #e3a94b;
+    padding: 2px 5px;
+  }
+
+  select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #e3a94b;
+    padding: 2px 5px;
+  }
 
   .fa-lightbulb {
     width: 1em;
@@ -51,3 +74,4 @@ body {
   font-family: 'Oswald', sans-serif;
   text-align: center;
 }
+

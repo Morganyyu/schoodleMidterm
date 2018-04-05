@@ -42,7 +42,17 @@ app.use("/api/users", usersRoutes(knex));
 app.get("/", (req, res) => {
   res.render("index");
 });
+app.post("/view", (req, res) => {
+	let templateVars = {name : req.body.hostname,
+	                    em: req.body.email,
+	                    theme: req.body.theme,
+	                    location: req.body.location,
+	                    description : req.body.description
+	                }
+  res.render("view",templateVars);
+});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
+

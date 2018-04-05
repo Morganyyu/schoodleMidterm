@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+<!--     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
@@ -25,33 +26,35 @@
 
     <main class="container">
       <h2 class="plan">Plan Now...</h2>
-      <section class="new-event">
+      <div class="new-event d-flex">
         <form method="post" action="./events">
           <div>
-            <i class="fas fa-user"></i>
-            <input type="text" name="name" placeholder="Your Name" required="required" maxlength="64">
-          </div>
-          <div>
-            <i class="far fa-envelope"></i>
-            <input type="email" name="email" placeholder="Enter Your Email" required="required">
-          </div>
-          <div>
-            <i class="far fa-lightbulb"></i>
-            <input type="text" name="title" placeholder="Enter Event Title" required="required" maxlength="64">
-          </div>
-          <div>
-            <i class="fas fa-location-arrow"></i>
-            <input type="text" name="location" placeholder="Add Location(Optional)">
-          </div>
-          <div>
-            <i class="far fa-comment-alt"></i>
-            <textarea type="text" name="details" placeholder="Add Details(Optional)" maxlength="1000"></textarea>
+            <div class="d-flex justify-content-center">
+              <i class="fas fa-user"></i>
+              <input type="text" name="name" class="input-fields" placeholder="Your Name" required="required" maxlength="64">
+            </div>
+            <div class="d-flex justify-content-center">
+              <i class="far fa-envelope"></i>
+              <input type="email" name="email" class="input-fields" placeholder="Enter Your Email" required="required">
+            </div>
+            <div class="d-flex justify-content-center">
+              <i class="far fa-lightbulb"></i>
+              <input type="text" name="title" class="input-fields" placeholder="Enter Event Title" required="required" maxlength="64">
+            </div>
+            <div class="d-flex justify-content-center">
+              <i class="fas fa-location-arrow"></i>
+              <input type="text" name="location" class="input-fields" placeholder="Add Location(Optional)">
+            </div>
+            <div class="d-flex justify-content-center">
+              <i class="far fa-comment-alt"></i>
+              <textarea type="text" name="details" class="input-fields" placeholder="Add Details(Optional)" maxlength="1000"></textarea>
+            </div>
           </div>
           <div class="all-events">
-            <div class="event-date d-flex flex-row">
+            <div class="event-date d-flex flex-row justify-content-center">
               <div class="year p-2">
                   <i class="far fa-calendar-alt"></i>
-                  <select class="year">
+                  <select name="year" class="year">
                   <option selected>Choose Year</option>
                   <option value="2018">2018</option>
                   <option value="2019">2019</option>
@@ -68,7 +71,7 @@
                 </select>
               </div>
               <div class="month p-2">
-                <select class="month">
+                <select name="month" class="month">
                   <option selected>Choose Month</option>
                   <option value="1">January</option>
                   <option value="2">February</option>
@@ -85,7 +88,7 @@
                 </select>
               </div>
               <div class="day p-2">
-                <select class="day">
+                <select name="day" class="day">
                   <option selected>Choose Day</option>
                   <option value="1">01</option>
                   <option value="2">02</option>
@@ -122,27 +125,24 @@
               </div>
               <div class="start-time p-2">
                 <i class="far fa-clock"></i>
-                <label for="appt-time">Start Time: </label>
-                <input id="appt-time" type="time" name="appt-time" value="00:00">
+                <label for="start-time">Start Time: </label>
+                <input id="start-time" type="time" name="start-time" value="00:00">
               </div>
               <div class="end-time p-2">
                 <i class="fas fa-clock"></i>
-                <label for="appt-time">End Time: </label>
-                <input id="appt-time" type="time" name="appt-time" value="00:00">
+                <label for="end-time">End Time: </label>
+                <input id="end-time" type="time" name="end-time" value="00:00">
               </div>
             </div>
           </div>
-          <div>
+          <div class="d-flex justify-content-center">
             <button class="add" type="button">Add More Times</button>
           </div>
-          <div class="submit-btn">
+          <div class="submit-btn d-flex justify-content-center">
             <button class="submit" type="submit" href="/events">Confirm Your Event</button>
           </div>
         </form>
-      </section>
-      <section class="tweets-container">
-      </section>
+      </div>
     </main>
-
   </body>
 </html>

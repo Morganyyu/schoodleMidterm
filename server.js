@@ -63,12 +63,17 @@ app.get("/events", (req, res) => {
 
 app.post("/events", (req, res) => {
 	console.log('post /events')
+  var dateTest = ('Year ' + req.body.year + 'Month ' + req.body.month + 'Day' + req.body.day + ' start time ' + req.body.start_time + ' end time ' + req.body.end_time)
+  console.log(dateTest)
+  var isoDate = new Date(req.body.year + req.body.month + req.body.day) //JSON.stringify(req.body)
+  console.log('THIS IS WHERE THE ISODATE SHOULD BE: ' + isoDate)
+  console.log('This is JSON stringify of req.body ' + JSON.stringify(req.body))
     knex('events').insert({
 
-      event_name: req.body.title,
-      event_url:generateRandomString(),
-      details: req.body.details,
-      sched_name: req.body.name,
+      event_name : req.body.title,
+      event_url  : generateRandomString(),
+      details    : req.body.details,
+      sched_name : req.body.name,
       sched_email: req.body.email
     }).then(() => {
       //res.sendStatus(200);
@@ -78,7 +83,8 @@ app.post("/events", (req, res) => {
      throw err;
     })
     knex('timeslots').insert({
-      time: (req.body.)
+      start_time : req.body.year,
+      end_time   : req.body.month
     }).then(() => {
       console.log('success for timeslots this is so great weeeeeeeeeeeeeee')
     })

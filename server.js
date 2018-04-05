@@ -43,8 +43,28 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.post("/events", (req, res) => {
+app.get("/events", (req, res) => {
+
   res.render("events");
+});
+
+app.post("/events", (req, res) => {
+	console.log('post /events')
+    knex('events').insert({
+      
+      event_name: `Sam's Birthday!`,
+      details: `Everyone come to Sam's Bday party at Sam's House`,
+      event_url: 'http://localhost:8080/123456789',
+      sched_name: 'Sam Schantz',
+      sched_email: 'samvschantz@gmail.com'
+    }).then(() => {
+      //res.sendStatus(200);
+      console.log('success')
+    })
+    .catch((err)=>{
+     throw err;
+    })
+   res.render("events");
 });
 
 app.listen(PORT, () => {

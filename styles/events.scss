@@ -1,0 +1,48 @@
+body {
+  background-color: #88A7AF;
+}
+
+body h1 {
+  color: #244751;
+  padding-left: 5px;
+}
+
+body h2 {
+  color: #244751;
+  padding-left: 400px;
+  padding-top: 50px;
+}
+
+.div-class {
+  height: 50px;
+  width: 100px;
+  background-color: black;
+}
+
+/* rowspan, colspan html attributes if you need them */
+.event-table {
+  margin-left: 200px;
+  width: 30%;
+  background: white;
+  td, th {
+    border: 2px solid grey;
+    width: 50px;
+  }
+  td:first-child, th:first-child {
+    width: auto;
+  }
+border: 1px solid black;
+border-radius: 2px;
+}
+
+header {
+    height:80px;
+    background:#E77753;
+    border:1px solid #E77753;
+    width:960px;
+    margin:0px auto;
+}
+
+body p {
+  padding-left: 400px;
+}

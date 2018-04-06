@@ -13,7 +13,7 @@ $(() => {
     const $tr = $(this).parents('tr');
 
     if($button.data('enabled')) {
-      $button.data('enabled', false);
+      $button.data('enabled', true);
 
       $button.css("font-weight","bold");
       $tr.find('input').prop('disabled', '');
@@ -30,7 +30,8 @@ $(() => {
     // console.log($button.data('enabled'));
     const $rowclone = $("#rowtemplate").clone();
     $rowclone.appendTo($(".event-table > tbody"));
-    $rowclone.find('.user').text('newUser');
+    // $rowclone.find('.user')
+    $("input.name").focus;
 
   });
 

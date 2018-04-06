@@ -10,72 +10,69 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
-  </head>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    </head>
 
   <body>
     <nav>
       <span class="logo">Schoodle</span>
     </nav>
+    <main>
+      <h2>Event Title</h2>
 
     <h2>Event Title <%=title%></h2>
 
     <p>Created by:<%=name%></p>
     <p>Location:<%=location%></p>
     <p>Details: <%=details%></p>
+      <table class="event-table">
+      <tr>
+        <th></th>
+        <th>Apr 11 Wed 12:15 AM 1:00 AM</th>
+        <th>Apr 11 Wed 3:15 AM 4:45 AM</th>
+        <th>Apr 18 Wed 12:15 AM 1:00 AM</th>
+        <th>Apr 19 Thu 3:15 PM 5:00 PM</th>
+        <th>Apr 20 Thu 4:15 PM 6:00 PM</th>
+      </tr>
+      <tr class="new">
+      <td class="new-part">New Participant<i class="fas fa-user-plus icon"></i></td>
 
-<br></br>
+    </tr>
+    <tr>
+      <td class="user">Person<i class="fas fa-edit icon"></i></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+    </tr>
+    <tr>
+      <td class="user">GucciYizhe<i class="fas fa-edit icon"></i></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+    </tr>
+    <tr>
+      <td class="user">Dominicbbbb<i class="fas fa-edit icon"></i></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+    </tr>
+    <tr>
+      <td class="user">morganthecoolest<i class="fas fa-edit icon"></i></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+      <td><input type="checkbox" onclick="return false;" disabled="disabled"></td>
+    </tr>
 
-    <table class="event-table">
-  <tr>
-    <th></th>
-    <th>Apr 11 Wed 12:15 AM 1:00 AM</th>
-    <th>Apr 11 Wed 3:15 AM 4:45 AM</th>
-    <th>Apr 18 Wed 12:15 AM 1:00 AM</th>
-    <th>Apr 19 Thu 3:15 PM 5:00 PM</th>
-    <th>Apr 20 Thu 4:15 PM 6:00 PM</th>
-  </tr>
-  <tr>
-  <td>Participant</td>
-  <td></td>
-  <td><i class="fas fa-check"></i></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td>Person</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><i class="fas fa-check"></i></td>
-  <td></td>
-</tr>
-<tr>
-  <td>GucciYizheSwag</td>
-  <td></td>
-  <td><i class="fas fa-check"></i></td>
-  <td><i class="fas fa-check"></i></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td>Dominicbbbb</td>
-  <td><i class="fas fa-check"></i></td>
-  <td><i class="fas fa-check"></i></td>
-  <td></td>
-  <td></td>
-  <td></td>
-</tr>
-<tr>
-  <td>morganthecoolest</td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td></td>
-  <td><i class="fas fa-check"></i></td>
-</tr>
-
-</table>
-
+    </table>
+  </main>
   </body>
 </html>

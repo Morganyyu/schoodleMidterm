@@ -63,31 +63,48 @@ app.get("/events", (req, res) => {
 
 app.post("/events", (req, res) => {
 	console.log('post /events')
-  var startDate = new Date(`${req.body.year} ${req.body.month} ${req.body.day} ${req.body.start_time}`)
-  var endDate = new Date(`${req.body.year} ${req.body.month} ${req.body.day} ${req.body.end_time}`)
-    knex('events').insert({
+  console.log('JSON Stringify ' + JSON.stringify(req.body))
+  var yearArray = req.body.year
+  var monthArray = req.body.month
+  var dayArray = req.body.day
+  var startArray = req.body.start_time
+  var endArray = req.body.end_time
+  var timeArray = [req.body.year, req.body.month, req.body.day, req.body.start_time, req.body.end_time]
 
+  // var startDate = new Date(`${req.body.year} ${req.body.month} ${req.body.day} ${req.body.start_time}`)
+  // var endDate = new Date(`${req.body.year} ${req.body.month} ${req.body.day} ${req.body.end_time}`)
+    knex('events')
+    .returning('id')
+    .insert({
       event_name : req.body.title,
       event_url  : generateRandomString(),
       details    : req.body.details,
       sched_name : req.body.name,
       sched_email: req.body.email
-    }).then(() => {
-      //res.sendStatus(200);
-      console.log('success')
+    }).then((id) => {
+      var b = []
+      for (var i = 0; i < timeArray[i].length; i++){
+        for (var x = 0; x < timeArray.length; x++){
+          b.push(timeArray[x][i])
+          console.log('Most deepest b ' + b)
+        }
+        console.log('this is b inside the second part of for loop ' + b)
+      }
+      console.log(b)
     })
     .catch((err)=>{
      throw err;
     })
-    knex('timeslots').insert({
-      start_time : startDate,
-      end_time   : endDate
-    }).then(() => {
-      console.log('success for timeslots this is so great weeeeeeeeeeeeeee')
-    })
-    .catch((err)=>{
-     throw err;
-    })
+    // knex('timeslots').insert({
+    //   //event_id   :
+    //   start_time : startDate,
+    //   end_time   : endDate
+    // }).then(() => {
+    //   console.log('success for timeslots this is so great weeeeeeeeeeeeeee')
+    // })
+    // .catch((err)=>{
+    //  throw err;
+    // })
 
    res.render("events");
 });

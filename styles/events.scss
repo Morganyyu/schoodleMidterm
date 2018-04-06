@@ -11,6 +11,9 @@ nav {
     transform: translatey(0px);
     animation: float 6s ease-in-out infinite;
   }
+  a {
+    text-decoration: none;
+  }
 }
 
 @keyframes float {
@@ -34,7 +37,7 @@ body {
 }
 
 
-body h2 {
+body h1 {
   color: #244751;
   text-align:center;
   padding-top: 50px;

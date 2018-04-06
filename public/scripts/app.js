@@ -23,6 +23,18 @@ $(() => {
       $tr.find('input').prop('disabled', 'disabled');
     }
     console.log($button.data('enabled'));
+  });
+
+  $("main").on('click', '.new-part', function(e) {
+    const $button = $(this);
+    // console.log($button.data('enabled'));
+    const $rowclone = $("#rowtemplate").clone();
+    $rowclone.appendTo($(".event-table > tbody"));
+    $rowclone.find('.user').text('newUser');
 
   });
+
+
+
+
 });

@@ -56,10 +56,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/:id", (req, res, next) => {
-
   console.log('req ' + JSON.stringify(req.params))
     knex('events')
-      .first("event_name","details","sched_name",)
+      .first("event_name","details","sched_name","id")
       .where("event_url" , req.params.id )
       .then((event) => {
         if(event){
@@ -70,7 +69,6 @@ app.get("/:id", (req, res, next) => {
             details  :  event.details
           }
           res.render("events", templatevars);
-
         } else {
           next()
         }
@@ -91,8 +89,6 @@ app.post("/", (req, res) => {
   var startArray = req.body.start_time;
   var endArray = req.body.end_time;
 
-  // var startDate = new Date(`${req.body.year} ${req.body.month} ${req.body.day} ${req.body.start_time}`)
-  // var endDate = new Date(`${req.body.year} ${req.body.month} ${req.body.day} ${req.body.end_time}`)
     knex('events')
     .returning('id')
     .insert({
@@ -131,16 +127,16 @@ app.post("/", (req, res) => {
                 end_time   : endDate
               }).then(() => {
                 console.log('success for timeslots this is so great weeeeeeeeeeeeeee')
-              })
-              .catch((err)=>{
-               throw err;
-              })
+            })
+            .catch((err)=>{
+            throw err;
+          })
         }
       }
     })
     .catch((err)=>{
      throw err;
-    })
+  })
 
    res.redirect(`/${oururl}`);
 });

@@ -1,7 +1,7 @@
 $(() => {
   $.ajax({
     method: "GET",
-    url: "/api/users"
+    url: "/:id"
   }).then((timeslots) => {
     for(timeslot of timeslots) {
       $("<div>").text(`ID: ${timeslot.id} start: ${timeslot.start_time}  end: ${timeslot.end_time} event id: ${event_id}`).appendTo($("body"));

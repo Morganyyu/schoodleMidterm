@@ -56,19 +56,33 @@ app.get("/", (req, res) => {
 });
 
 app.get("/:id", (req, res, next) => {
+  let templatevars = {}
   console.log('req ' + JSON.stringify(req.params))
     knex('events')
       .first("event_name","details","sched_name","id")
       .where("event_url" , req.params.id )
       .then((event) => {
         if(event){
-          let templatevars = {
+          templatevars = {
             name     :  event.sched_name,
             title    :  event.event_name,
             location :  event.location,
             details  :  event.details
           }
-          res.render("events", templatevars);
+          knex('timeslots')
+            .select("start_time","end_time")
+            .where("event_id", event.id)
+            .then((timeslot) => {
+              console.log(event.id)
+              if(timeslot){
+                console.log(timeslot)
+                templatevars.start_time = timeslot[0].start_time
+                console.log(templatevars)
+                res.render("events", templatevars);
+              } else {
+                next()
+              }
+            });
         } else {
           next()
         }

@@ -25,9 +25,6 @@ $(() => {
                               </td>
                             </tr>`;
 
-
-
-
        let $newRow = $(userRowTemplate);
        for(i = 0; i < votelength-1; i++){
 

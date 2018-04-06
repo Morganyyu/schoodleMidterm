@@ -86,11 +86,42 @@ app.post("/events", (req, res) => {
       for (var i = 0; i < timeArray[i].length; i++){
         for (var x = 0; x < timeArray.length; x++){
           b.push(timeArray[x][i])
-          console.log('Most deepest b ' + b)
         }
-        console.log('this is b inside the second part of for loop ' + b)
       }
-      console.log(b)
+      function chunkArray(myArray, chunk_size){
+        var index = 0;
+        var arrayLength = myArray.length;
+        var tempArray = [];
+
+          for (index = 0; index < arrayLength; index += chunk_size) {
+            var myChunk = myArray.slice(index, index+chunk_size);
+            // Do something if you want with the group
+            tempArray.push(myChunk);
+          }
+          return tempArray;
+        }
+      var c = chunkArray(b,5)
+      for (i in c){
+        console.log(c[i])
+        var fixedTimeArray = c[i]
+        var year = c[i][0]
+        var month = c[i][1]
+        var day = c[i][2]
+        var start_time = c[i][3]
+        var end_time = c[i][4]
+        var startDate = new Date(`${year} ${month} ${day} ${start_time}`)
+        var endDate = new Date(`${year} ${month} ${day} ${end_time}`)
+        knex('timeslots').insert({
+            event_id   : id[0],
+            start_time : startDate,
+            end_time   : endDate
+          }).then(() => {
+            console.log('success for timeslots this is so great weeeeeeeeeeeeeee')
+          })
+          .catch((err)=>{
+           throw err;
+          })
+      }
     })
     .catch((err)=>{
      throw err;

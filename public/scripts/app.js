@@ -2,9 +2,9 @@ $(() => {
   $.ajax({
     method: "GET",
     url: "/api/users"
-  }).then((participants) => {
-    for(participant of participants) {
-      $("<div>").text(`ID: ${participant.id} Email: ${participant.email} \n Name: ${participant.name}`).appendTo($("body"));
+  }).then((timeslots) => {
+    for(timeslot of timeslots) {
+      $("<div>").text(`ID: ${timeslot.id} start: ${timeslot.start_time}  end: ${timeslot.end_time} event id: ${event_id}`).appendTo($("body"));
     }
   });
 

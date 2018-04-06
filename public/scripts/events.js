@@ -4,6 +4,7 @@ $(function () {
     $(input).removeAttr("disabled");
   });
 
+
     function createEventElement(data){
 
       // Redefining and appending variables for jQuery
@@ -14,9 +15,6 @@ $(function () {
       let $tweet = $("<article>").addClass("tweets");
       let $header = $("<header>").addClass("header");
 
-      let $img = $("<img>").addClass("avatar");
-      $img.attr('src', avatar);
-      $header.append($img);
 
 
       return $event;

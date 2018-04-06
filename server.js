@@ -55,7 +55,6 @@ app.get("/", (req, res) => {
   var randonmun = generateRandomString();
 });
 
-
 app.get("/:id", (req, res) => {
 
 
@@ -70,7 +69,7 @@ app.get("/:id", (req, res) => {
                              location : results[0].location,
                              details :  results[0].details
                              }
-         console.log(templatevars) 
+         console.log(templatevars)
          res.render("events", templatevars);
       });
 
@@ -83,21 +82,70 @@ app.get("/:id", (req, res) => {
 app.post("/", (req, res) => {
 	let oururl = generateRandomString()
 	console.log('post /events')
-    knex('events').insert({
-      
+  console.log('JSON Stringify ' + JSON.stringify(req.body))
+  var yearArray = req.body.year
+  var monthArray = req.body.month
+  var dayArray = req.body.day
+  var startArray = req.body.start_time
+  var endArray = req.body.end_time
+  var timeArray = [req.body.year, req.body.month, req.body.day, req.body.start_time, req.body.end_time]
+
+  // var startDate = new Date(`${req.body.year} ${req.body.month} ${req.body.day} ${req.body.start_time}`)
+  // var endDate = new Date(`${req.body.year} ${req.body.month} ${req.body.day} ${req.body.end_time}`)
+    knex('events')
+    .returning('id')
+    .insert({
       event_name: req.body.title,
       event_url:oururl,
       details: req.body.details,
       sched_name: req.body.name,
       sched_email: req.body.email
-    }).then(() => {
-      //res.sendStatus(200);
-      console.log('success')
+    }).then((id) => {
+      var b = []
+      for (var i = 0; i < timeArray[i].length; i++){
+        for (var x = 0; x < timeArray.length; x++){
+          b.push(timeArray[x][i])
+        }
+      }
+      function chunkArray(myArray, chunk_size){
+        var index = 0;
+        var arrayLength = myArray.length;
+        var tempArray = [];
+
+          for (index = 0; index < arrayLength; index += chunk_size) {
+            var myChunk = myArray.slice(index, index+chunk_size);
+            // Do something if you want with the group
+            tempArray.push(myChunk);
+          }
+          return tempArray;
+        }
+      var c = chunkArray(b,5)
+      for (i in c){
+        console.log(c[i])
+        var fixedTimeArray = c[i]
+        var year = c[i][0]
+        var month = c[i][1]
+        var day = c[i][2]
+        var start_time = c[i][3]
+        var end_time = c[i][4]
+        var startDate = new Date(`${year} ${month} ${day} ${start_time}`)
+        var endDate = new Date(`${year} ${month} ${day} ${end_time}`)
+        knex('timeslots').insert({
+            event_id   : id[0],
+            start_time : startDate,
+            end_time   : endDate
+          }).then(() => {
+            console.log('success for timeslots this is so great weeeeeeeeeeeeeee')
+          })
+          .catch((err)=>{
+           throw err;
+          })
+      }
     })
     .catch((err)=>{
      throw err;
     })
-    
+
    res.redirect(`/${oururl}`);
 });
 

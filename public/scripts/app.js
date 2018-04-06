@@ -25,17 +25,29 @@ $(() => {
     console.log($button.data('enabled'));
   });
 
+  function renderUsers(users) {
+  var createUsers;
+  for(var i = 0; i < users.length; i++) {
+   createUsers = users[i];
+   let $element = createUserElement(createUsers);
+   $('#userlist').prepend($element);
+ }
+}
+
   $("main").on('click', '.new-part', function(e) {
     const $button = $(this);
-    // console.log($button.data('enabled'));
-    const $rowclone = $("#rowtemplate").clone();
-    $rowclone.appendTo($(".event-table > tbody"));
-    // $rowclone.find('.user')
-    $("input.name").focus;
+
+    const $tbody = $(`.event-table > tbody`);
+    const $row = $(`<tr id="rowtemplate">`);
+    const $user = $(`<td class="user">`).append(`<input name="name" class="name" type="text" placeholder="Your Name">
+                                                <br /><input name="email" type="email" placeholder="Your Email">`);
+    let $votes = $(`<td class="votes">`).append(`<input name="votes" class="votes" type="checkbox" disabled="disabled">`);
+    ($tbody).append($row).append($user);
+
+
+    return e;
 
   });
-
-
 
 
 });

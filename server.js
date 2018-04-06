@@ -55,25 +55,26 @@ app.get("/", (req, res) => {
   var randonmun = generateRandomString();
 });
 
-app.get("/:id", (req, res) => {
+app.get("/:id", (req, res, next) => {
 
-
-    knex
-      .select("event_name","details","sched_name",)
-      .from("events")
+  console.log('req ' + JSON.stringify(req.params))
+    knex('events')
+      .first("event_name","details","sched_name",)
       .where("event_url" , req.params.id )
-      .then((results) => {
+      .then((event) => {
+        if(event){
+          let templatevars = {
+            name     :  event.sched_name,
+            title    :  event.event_name,
+            location :  event.location,
+            details  :  event.details
+          }
+          res.render("events", templatevars);
 
-        let templatevars = { title : results[0].event_name,
-  	                         name:   results[0].sched_name,
-                             location : results[0].location,
-                             details :  results[0].details
-                             }
-         console.log(templatevars)
-         res.render("events", templatevars);
+        } else {
+          next()
+        }
       });
-
-
 });
 
 
@@ -83,12 +84,12 @@ app.post("/", (req, res) => {
 	let oururl = generateRandomString()
 	console.log('post /events')
   console.log('JSON Stringify ' + JSON.stringify(req.body))
-  var yearArray = req.body.year
-  var monthArray = req.body.month
-  var dayArray = req.body.day
-  var startArray = req.body.start_time
-  var endArray = req.body.end_time
-  var timeArray = [req.body.year, req.body.month, req.body.day, req.body.start_time, req.body.end_time]
+  var yearArray = req.body.year;
+  var monthArray = req.body.month;
+  var dayArray = req.body.day;
+  var startArray = req.body.start_time;
+  var endArray = req.body.end_time;
+  var timeArray = [req.body.year, req.body.month, req.body.day, req.body.start_time, req.body.end_time];
 
   // var startDate = new Date(`${req.body.year} ${req.body.month} ${req.body.day} ${req.body.start_time}`)
   // var endDate = new Date(`${req.body.year} ${req.body.month} ${req.body.day} ${req.body.end_time}`)
@@ -101,7 +102,8 @@ app.post("/", (req, res) => {
       sched_name: req.body.name,
       sched_email: req.body.email
     }).then((id) => {
-      var b = []
+      console.log(timeArray);
+            var b = []
       for (var i = 0; i < timeArray[i].length; i++){
         for (var x = 0; x < timeArray.length; x++){
           b.push(timeArray[x][i])
@@ -147,6 +149,10 @@ app.post("/", (req, res) => {
     })
 
    res.redirect(`/${oururl}`);
+});
+
+app.use((req, res, next) => {
+  res.status(404).render('404');
 });
 
 app.listen(PORT, () => {

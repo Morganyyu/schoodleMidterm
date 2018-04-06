@@ -73,11 +73,15 @@ app.get("/:id", (req, res, next) => {
             .select("start_time","end_time")
             .where("event_id", event.id)
             .then((timeslot) => {
-              console.log(event.id)
               if(timeslot){
-                console.log(timeslot)
-                templatevars.start_time = timeslot[0].start_time
-                console.log(templatevars)
+                var startSlotsArray = []
+                var endSlotsArray = []
+                for (var x = 0; x < timeslot.length; x++){
+                  startSlotsArray.push(timeslot[x].start_time)
+                  endSlotsArray.push(timeslot[x].end_time)
+                }
+                templatevars.startSlotsArray = startSlotsArray
+                templatevars.endSlotsArray = endSlotsArray
                 res.render("events", templatevars);
               } else {
                 next()

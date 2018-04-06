@@ -36,8 +36,6 @@ function generateRandomString() {
 };
 
 
-
-
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
@@ -54,14 +52,35 @@ app.use("/api/users", usersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
+  var randonmun = generateRandomString();
 });
 
-app.get("/events", (req, res) => {
+app.get("/:id", (req, res) => {
 
-  res.render("events");
+
+    knex
+      .select("event_name","details","sched_name",)
+      .from("events")
+      .where("event_url" , req.params.id )
+      .then((results) => {
+
+        let templatevars = { title : results[0].event_name,
+  	                         name:   results[0].sched_name,
+                             location : results[0].location,
+                             details :  results[0].details
+                             }
+         console.log(templatevars)
+         res.render("events", templatevars);
+      });
+
+
 });
 
-app.post("/events", (req, res) => {
+
+
+
+app.post("/", (req, res) => {
+	let oururl = generateRandomString()
 	console.log('post /events')
   console.log('JSON Stringify ' + JSON.stringify(req.body))
   var yearArray = req.body.year
@@ -76,10 +95,10 @@ app.post("/events", (req, res) => {
     knex('events')
     .returning('id')
     .insert({
-      event_name : req.body.title,
-      event_url  : generateRandomString(),
-      details    : req.body.details,
-      sched_name : req.body.name,
+      event_name: req.body.title,
+      event_url:oururl,
+      details: req.body.details,
+      sched_name: req.body.name,
       sched_email: req.body.email
     }).then((id) => {
       var b = []
@@ -126,18 +145,8 @@ app.post("/events", (req, res) => {
     .catch((err)=>{
      throw err;
     })
-    // knex('timeslots').insert({
-    //   //event_id   :
-    //   start_time : startDate,
-    //   end_time   : endDate
-    // }).then(() => {
-    //   console.log('success for timeslots this is so great weeeeeeeeeeeeeee')
-    // })
-    // .catch((err)=>{
-    //  throw err;
-    // })
 
-   res.render("events");
+   res.redirect(`/${oururl}`);
 });
 
 app.listen(PORT, () => {

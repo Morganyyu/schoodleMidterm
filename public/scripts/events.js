@@ -1,5 +1,9 @@
 $(function () {
 
+  $(".fa-edit").on('click', function () {
+    $(input).removeAttr("disabled");
+  });
+
     function createEventElement(data){
 
       // Redefining and appending variables for jQuery

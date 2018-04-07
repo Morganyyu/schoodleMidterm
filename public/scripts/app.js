@@ -17,6 +17,7 @@ $(() => {
      const $row = $('<tr id="rowtemplate">');
      console.log(votelength);
 
+
      let userRowTemplate = `<tr id="user_${user_count}" class="participant">
                               <form method="POST" action="/vote" id="createVote">
                                 <td class="user">
@@ -24,7 +25,6 @@ $(() => {
                                     <br />
                                   <input name="email" class="email" type="email" placeholder="Your Email" maxlength="64" required="required">
                                 </td>
-                              </form>
                             </tr>`;
 
        let $newRow = $(userRowTemplate);
@@ -37,7 +37,7 @@ $(() => {
          $newRow.append(voteBoxTemplate);
          vote_count++;
        }
-       let submitBtnTemplate = `<button type="submit" class="submit">Submit</button>`;
+       let submitBtnTemplate = `<button type="submit" class="submit">Submit</button></form>`;
        $newRow.append(submitBtnTemplate);
        $(`table.event-table`).append($newRow);
        user_count++;
@@ -50,6 +50,7 @@ $(() => {
           clickedObj[whatevVal] = whatev[0].checked
         });
 
+       // $('#createVote').validator('update');
        $('.submit').on('click', function(e) {
 
         e.preventDefault();

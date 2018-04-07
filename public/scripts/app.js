@@ -18,11 +18,13 @@ $(() => {
      console.log(votelength);
 
      let userRowTemplate = `<tr id="user_${user_count}" class="participant">
-                              <td class="user">
-                                <input name="name" type="text" placeholder="Your Name">
-                                  <br />
-                                <input name="email" type="email" placeholder="Your Email">
-                              </td>
+                              <form method="POST" action="/vote" id="createVote">
+                                <td class="user">
+                                  <input name="name" type="text" placeholder="Your Name">
+                                    <br />
+                                  <input name="email" type="email" placeholder="Your Email">
+                                </td>
+                              </form>
                             </tr>`;
 
        let $newRow = $(userRowTemplate);
@@ -35,6 +37,8 @@ $(() => {
          $newRow.append(voteBoxTemplate);
          vote_count++;
        }
+       let submitBtnTemplate = `<button type="submit" class="submit">Submit</button>`;
+       $newRow.append(submitBtnTemplate);
        $(`table.event-table`).append($newRow);
        user_count++;
 
@@ -69,6 +73,19 @@ function renderUsers(users) {
     $('#userlist').prepend($element);
   }
 }
+
+function createVoteElem(vote) {
+  let name;
+  let email;
+
+}
+
+$("#createVote").on('click', '.submit', function(e) {
+  e.preventDefault();
+  let data = $("#createVote").serialize();
+  $.post("/votes", data)
+
+})
 
 
 });

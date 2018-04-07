@@ -57,7 +57,6 @@ app.get("/", (req, res) => {
 
 app.get("/:id", (req, res, next) => {
   let templatevars = {}
-  console.log('req ' + JSON.stringify(req.params))
     knex('events')
       .first("event_name","details","sched_name","id")
       .where("event_url" , req.params.id )
@@ -93,15 +92,16 @@ app.get("/:id", (req, res, next) => {
       });
 });
 
+app.post("/vote", (req, res) => {
+  console.log('endpoint hit')
+  console.log(req.body)
+});
 
 
 
 app.post("/", (req, res) => {
-	let oururl = generateRandomString()
-	console.log('post /events')
-  console.log('JSON Stringify ' + JSON.stringify(req.body))
+	let oururl = generateRandomString();
   var yearArray = req.body.year;
-  console.log(req.body.year)
   var monthArray = req.body.month;
   var dayArray = req.body.day;
   var startArray = req.body.start_time;

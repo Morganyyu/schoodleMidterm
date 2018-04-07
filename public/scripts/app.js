@@ -20,9 +20,9 @@ $(() => {
      let userRowTemplate = `<tr id="user_${user_count}" class="participant">
                               <form method="POST" action="/vote" id="createVote">
                                 <td class="user">
-                                  <input name="name" type="text" placeholder="Your Name" required="required">
+                                  <input name="name" class="name" type="text" placeholder="Your Name" required="required">
                                     <br />
-                                  <input name="email" type="email" placeholder="Your Email" required="required">
+                                  <input name="email" class="email" type="email" placeholder="Your Email" required="required">
                                 </td>
                               </form>
                             </tr>`;
@@ -42,22 +42,41 @@ $(() => {
        $(`table.event-table`).append($newRow);
        user_count++;
 
+      let clickedObj = {}
+
+       $( "input[type=checkbox]" ).on( "click", function(x) {
+          let whatev = $(this)
+          let whatevVal = whatev.val()
+          clickedObj[whatevVal] = whatev[0].checked
+        });
+
        $('.submit').on('click', function(e) {
         e.preventDefault();
+        console.log(clickedObj)
+        //you have to vote for something in order to submit, protest votes don't count!
         let formObj = {};
         let button = $(this);
-        var tds = $(this).parent().siblings();
-        // tds.forEach()
-        // let data = $("#createVote");
-        console.log(tds[1]);
-        console.log("clicked");
-        console.log(e);
-        // $.post("/votes", data)
-      // if(".votebox").checked) {
-      //     $("#txtAge").show();
-      // } else {
-      //     $("#txtAge").hide();
-      // }
+        var tds = $(this).siblings();
+        var name = tds.children(".name").val();
+        var email = tds.children(".email").val();
+        clickedObj['email'] = email
+        clickedObj['name'] = name
+
+        $.ajax({
+           type: "POST",
+           url: "/vote",
+           dataType: "json",
+           success: function (msg) {
+               if (msg) {
+                   alert("It worked! How lit!");
+                   location.reload(true);
+               } else {
+                   alert("Not lit fam :(");
+               }
+           },
+
+           data: clickedObj
+       });
       })
 
      return e;

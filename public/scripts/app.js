@@ -20,9 +20,9 @@ $(() => {
      let userRowTemplate = `<tr id="user_${user_count}" class="participant">
                               <form method="POST" action="/vote" id="createVote">
                                 <td class="user">
-                                  <input name="name" type="text" placeholder="Your Name">
+                                  <input name="name" type="text" placeholder="Your Name" required="required">
                                     <br />
-                                  <input name="email" type="email" placeholder="Your Email">
+                                  <input name="email" type="email" placeholder="Your Email" required="required">
                                 </td>
                               </form>
                             </tr>`;
@@ -31,7 +31,7 @@ $(() => {
        for(i = 0; i < votelength-1; i++){
 
          let voteBoxTemplate = `<td class="votes">
-                                  <input type="checkbox" value ="${user_count}_${vote_count}">
+                                  <input type="checkbox" class="votebox" value ="${user_count}_${vote_count}">
                                 </td>`;
 
          $newRow.append(voteBoxTemplate);
@@ -41,6 +41,24 @@ $(() => {
        $newRow.append(submitBtnTemplate);
        $(`table.event-table`).append($newRow);
        user_count++;
+
+       $('.submit').on('click', function(e) {
+        e.preventDefault();
+        let formObj = {};
+        let button = $(this);
+        var tds = $(this).parent().siblings();
+        // tds.forEach()
+        // let data = $("#createVote");
+        console.log(tds[1]);
+        console.log("clicked");
+        console.log(e);
+        // $.post("/votes", data)
+      // if(".votebox").checked) {
+      //     $("#txtAge").show();
+      // } else {
+      //     $("#txtAge").hide();
+      // }
+      })
 
      return e;
    });
@@ -63,29 +81,35 @@ $(() => {
   });
 
 
-function renderUsers(users) {
+// function renderUsers(users) {
 
-  let createUsers;
+//   let createUsers;
 
-  for(var i = 0; i < users.length; i++) {
-    createUsers = users[i];
-    let $element = createUserElement(createUsers);
-    $('#userlist').prepend($element);
-  }
-}
+//   for(var i = 0; i < users.length; i++) {
+//     createUsers = users[i];
+//     let $element = createUserElement(createUsers);
+//     $('#userlist').prepend($element);
+//   }
+// }
 
-function createVoteElem(vote) {
-  let name;
-  let email;
+// function createVoteElem(vote) {
+//   // let name = req.body.name;
+//   // let email = req.body.email;
 
-}
+//   let voteTemplate = `<tr id="user_${user_count}" class="participant">
+//                               // <form method="POST" action="/vote" id="createVote">
+//                                 <td class="user">
+//                                   <>
+//                                     <br />
+//                                   <input name="email" type="email" placeholder="Your Email" required="required">
+//                                 </td>
+//                               // </form>
+//                             </tr>`;
 
-$("#createVote").on('click', '.submit', function(e) {
-  e.preventDefault();
-  let data = $("#createVote").serialize();
-  $.post("/votes", data)
+// }
 
-})
+
 
 
 });
+

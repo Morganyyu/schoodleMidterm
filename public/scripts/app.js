@@ -2,10 +2,8 @@ $(() => {
   $.ajax({
     method: "GET",
     url: "/:id"
-  }).then((timeslots) => {
-    for(timeslot of timeslots) {
-      $("<div>").text(`ID: ${timeslot.id} start: ${timeslot.start_time}  end: ${timeslot.end_time} event id: ${event_id}`).appendTo($("body"));
-    }
+  }).then((randomvar) => {
+    console.log('GET REQUEST WORKED HOORAY WEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE ' + randomvar)
   });
 
   let user_count = 0;

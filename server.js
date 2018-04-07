@@ -83,7 +83,18 @@ app.get("/:id", (req, res, next) => {
                 }
                 templatevars.startSlotsArray = startSlotsArray
                 templatevars.endSlotsArray = endSlotsArray
-                res.render("events", templatevars);
+              knex('votes')
+                .select("vote_data")
+                .where("event_id", event.id)
+                .then((vote_data) => {
+                  //tUiCzJ8TX2
+                  if(vote_data){
+                    templatevars.vote_data = vote_data
+                    res.render("events", templatevars);
+                  } else {
+                    next()
+                  }
+                })
               } else {
                 next()
               }
@@ -192,7 +203,7 @@ app.post("/vote", (req, res) => {
             .insert({
               participant_id : id[0],
               vote_data      : voteJSON,
-              timeslots_id_json   : timeslotJSON
+              event_id       : relEventId
             }).then(() => {
               console.log('Success for vote data')
             })

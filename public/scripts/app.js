@@ -51,6 +51,47 @@ $(() => {
         });
 
        $('.submit').on('click', function(e) {
+    let votelength = $("#voteslength > th").length;
+    let vote_count = 0;
+    const $button = $(this);
+    const $row = $('<tr id="rowtemplate">');
+    console.log(votelength);
+
+    let userRowTemplate = `<tr id="user_${user_count}" class="participant">
+                            <form method="POST" action="/vote" id="createVote">
+                              <td class="user">
+                                <input name="name" class="name" type="text" placeholder="Your Name" required="required">
+                                  <br />
+                                <input name="email" class="email" type="email" placeholder="Your Email" required="required">
+                              </td>
+                            </form>
+                          </tr>`;
+
+      let $newRow = $(userRowTemplate);
+      for(i = 0; i < votelength-1; i++){
+
+        let voteBoxTemplate = `<td class="votes">
+                                <input type="checkbox" class="votebox" value ="${user_count}_${vote_count}">
+                              </td>`;
+
+        $newRow.append(voteBoxTemplate);
+        vote_count++;
+      }
+
+      let submitBtnTemplate = `<button type="submit" class="submit">Submit</button>`;
+      $newRow.append(submitBtnTemplate);
+      $(`table.event-table`).append($newRow);
+      user_count++;
+
+      $('input[type="checkbox"]').on('click', function(e) {
+        let box = $(this);
+        let value = box.val();
+        console.log(value);
+        console.log(e);
+        console.log(box[0].checked);
+      });
+
+      $('.submit').on('click', function(e) {
         e.preventDefault();
         console.log(clickedObj)
         //you have to vote for something in order to submit, protest votes don't count!
@@ -79,8 +120,33 @@ $(() => {
        });
       })
 
-     return e;
-   });
+        var arr = [];
+
+        console.log(input[type="checkbox".prop('checked')]);
+
+
+
+          for(var j=0; j<votelength-1; j++){
+
+            if($(input[type="checkbox"]).prop('checked')){
+              arr.push(true);
+            } else {
+              arr.push(false);
+            }
+          }
+
+        console.log(arr);
+
+
+        console.log(name);
+        console.log(email);
+        console.log(e);
+        // $.post("/votes", data)
+
+    })
+
+    return e;
+  });
 
   $("main").on('click', '.new-part', function(e) {
     const $button = $(this);
@@ -131,4 +197,3 @@ $(() => {
 
 
 });
-

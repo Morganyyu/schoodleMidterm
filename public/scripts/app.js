@@ -20,9 +20,9 @@ $(() => {
      let userRowTemplate = `<tr id="user_${user_count}" class="participant">
                               <form method="POST" action="/vote" id="createVote">
                                 <td class="user">
-                                  <input name="name" class="name" type="text" placeholder="Your Name" required="required">
+                                  <input name="name" class="name" type="text" placeholder="Your Name" maxlength="64" required="required">
                                     <br />
-                                  <input name="email" class="email" type="email" placeholder="Your Email" required="required">
+                                  <input name="email" class="email" type="email" placeholder="Your Email" maxlength="64" required="required">
                                 </td>
                               </form>
                             </tr>`;
@@ -63,6 +63,7 @@ $(() => {
         clickedObj['email'] = email
         clickedObj['name'] = name
 
+
         $.ajax({
            type: "POST",
            url: "/vote",
@@ -98,36 +99,5 @@ $(() => {
     }
     console.log($button.data('enabled'));
   });
-
-
-// function renderUsers(users) {
-
-//   let createUsers;
-
-//   for(var i = 0; i < users.length; i++) {
-//     createUsers = users[i];
-//     let $element = createUserElement(createUsers);
-//     $('#userlist').prepend($element);
-//   }
-// }
-
-// function createVoteElem(vote) {
-//   // let name = req.body.name;
-//   // let email = req.body.email;
-
-//   let voteTemplate = `<tr id="user_${user_count}" class="participant">
-//                               // <form method="POST" action="/vote" id="createVote">
-//                                 <td class="user">
-//                                   <>
-//                                     <br />
-//                                   <input name="email" type="email" placeholder="Your Email" required="required">
-//                                 </td>
-//                               // </form>
-//                             </tr>`;
-
-// }
-
-
-
 
 });

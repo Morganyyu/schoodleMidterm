@@ -20,9 +20,9 @@ $(() => {
      let userRowTemplate = `<tr id="user_${user_count}" class="participant">
                               <form method="POST" action="/vote" id="createVote">
                                 <td class="user">
-                                  <input name="name" class="name" type="text" placeholder="Your Name" required="required">
+                                  <input name="name" class="name" type="text" placeholder="Your Name" value="" required="required">
                                     <br />
-                                  <input name="email" class="email" type="email" placeholder="Your Email" required="required">
+                                  <input name="email" class="email" type="email" placeholder="Your Email" value="" required="required">
                                 </td>
                               </form>
                             </tr>`;

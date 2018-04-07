@@ -79,11 +79,8 @@ $(() => {
            data: clickedObj
        });
       })
-
-    })
-
-    return e;
-  });
+       return e;
+    });
 
   $("main").on('click', '.new-part', function(e) {
     const $button = $(this);

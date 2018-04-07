@@ -53,6 +53,7 @@ $(() => {
        $('.submit').on('click', function(e) {
 
         e.preventDefault();
+        console.log('this should be event id ' + event.id)
         console.log(clickedObj)
         //you have to vote for something in order to submit, protest votes don't count!
         let formObj = {};
@@ -75,7 +76,6 @@ $(() => {
                    alert("Not lit fam :(");
                }
            },
-
            data: clickedObj
        });
       })

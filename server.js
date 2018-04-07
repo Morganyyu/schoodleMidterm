@@ -92,15 +92,10 @@ app.get("/:id", (req, res, next) => {
       });
 });
 
-app.post("/vote", (req, res) => {
-  console.log('endpoint hit')
-  console.log(req.body)
-});
-
-
+let oururl = generateRandomString();
 
 app.post("/", (req, res) => {
-	let oururl = generateRandomString();
+	//let oururl = generateRandomString();
   var yearArray = req.body.year;
   var monthArray = req.body.month;
   var dayArray = req.body.day;
@@ -110,11 +105,11 @@ app.post("/", (req, res) => {
     knex('events')
     .returning('id')
     .insert({
-      event_name: req.body.title,
-      event_url:oururl,
-      details: req.body.details,
-      sched_name: req.body.name,
-      sched_email: req.body.email
+      event_name  : req.body.title,
+      event_url   : oururl,
+      details     : req.body.details,
+      sched_name  : req.body.name,
+      sched_email : req.body.email
     }).then((id) => {
       if (typeof yearArray === 'string'){
         var startDate = new Date(`${req.body.year} ${req.body.month} ${req.body.day} ${req.body.start_time}`);
@@ -157,6 +152,84 @@ app.post("/", (req, res) => {
   })
 
    res.redirect(`/${oururl}`);
+});
+
+app.post("/vote", (req, res) => {
+  console.log('endpoint hit')
+  var voteJSON = JSON.stringify(req.body)
+  var email = req.body.email
+  var name = req.body.name
+  var relEventId = 0
+  console.log(oururl)
+  knex.select('id').from('events')
+    // .returning('id')
+    .where("event_url", oururl)
+    .then(function(event) {
+      relEventId += event[0].id;
+      console.log('this is relEventId ' + relEventId)
+      //console.log(id[0])
+      knex('timeslots')
+        .returning('id')
+        .where("event_id", relEventId)
+        .then((timeslotID) =>{
+          var timeSlotObj = {}
+          for (i = 0; i < timeslotID.length; i++){
+            timeSlotObj[i] = timeslotID[i]['id']
+          }
+          console.log(timeSlotObj)
+        })
+        .catch((err)=>{
+               throw err;
+        })
+      knex('participants')
+        .returning('id')
+        .insert({
+          email  : email,
+          name   : name
+        }).then((id) => {
+          knex('votes')
+            .insert({
+              participant_id : id[0],
+              vote_data      : voteJSON,
+              //timeslots_id   : timeslotID
+            }).then(() => {
+              console.log('Success for vote data')
+            })
+            .catch((err)=>{
+                   throw err;
+            })
+          console.log('Success for participant data')
+        })
+        .catch((err)=>{
+               throw err;
+        })
+    })
+    .catch((err)=>{
+            throw err;
+    })
+
+  // knex('participants')
+  //   .returning('id')
+  //   .insert({
+  //     email  : email,
+  //     name   : name
+  //   }).then((id) => {
+  //     knex('votes')
+  //       .insert({
+  //         participant_id : id[0],
+  //         vote_data      : voteJSON,
+  //         event_id       : relEventId
+  //       }).then(() => {
+  //         console.log('Success for vote data')
+  //       })
+  //       .catch((err)=>{
+  //              throw err;
+  //       })
+  //     console.log('Success for participant data')
+  //   })
+  //   .catch((err)=>{
+  //          throw err;
+  //   })
 });
 
 app.use((req, res, next) => {

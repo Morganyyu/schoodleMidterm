@@ -1,11 +1,17 @@
+$prime:#435b66;
+$second:#88a7af;
+$third:#f7f4ef;
+$forth:#e3a94b;
+$fifth:#e77753;
+
 nav {
-  background-color: #e77753;
+  background-color: $fifth;
   height: 60px;
 
   .logo {
     font-family: 'Lobster', cursive;
     font-size: 40px;
-    color: #435b66;
+    color: $prime;
     margin-left: 20px;
     text-shadow: 5px 15px rgba(0,0,0,0.6);
     transform: translatey(0px);
@@ -33,7 +39,7 @@ nav {
 
 
 body {
-  background-color: #88A7AF;
+  background-color: $second;
 }
 
 
@@ -55,7 +61,10 @@ body h1 {
   margin-left: auto;
   margin-right: auto;
   width: 30%;
-  background: #F7F4EF;
+  background: rgb(34,193,195);
+  background: radial-gradient(circle, rgba(34,193,195,1) 0%, rgba(148,187,233,1) 100%);
+  opacity: 80%;
+
   td, th {
     border: 1px solid grey;
     width: 50px;
@@ -66,8 +75,8 @@ body h1 {
     width: auto;
   }
   th {
-    background-color: #4CAF50;
     color: white;
+    width: 40%;
 }
 border: 1px solid black;
 border-radius: 5px;

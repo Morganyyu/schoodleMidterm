@@ -55,6 +55,8 @@ app.get("/", (req, res) => {
   var randonmun = generateRandomString();
 });
 
+let oururl = generateRandomString();
+
 app.get("/:id", (req, res, next) => {
   let templatevars = {}
     knex('events')
@@ -91,8 +93,6 @@ app.get("/:id", (req, res, next) => {
         }
       });
 });
-
-let oururl = generateRandomString();
 
 app.post("/", (req, res) => {
 	//let oururl = generateRandomString();
@@ -160,23 +160,24 @@ app.post("/vote", (req, res) => {
   var email = req.body.email
   var name = req.body.name
   var relEventId = 0
+  var timeslotJSON = ''
   console.log(oururl)
   knex.select('id').from('events')
     // .returning('id')
     .where("event_url", oururl)
     .then(function(event) {
-      relEventId += event[0].id;
-      console.log('this is relEventId ' + relEventId)
-      //console.log(id[0])
+    relEventId += event[0].id;
+    console.log('this is relEventId ' + relEventId)
+    //console.log(id[0])
       knex('timeslots')
         .returning('id')
         .where("event_id", relEventId)
-        .then((timeslotID) =>{
+        .then((timeslotID) => {
           var timeSlotObj = {}
           for (i = 0; i < timeslotID.length; i++){
             timeSlotObj[i] = timeslotID[i]['id']
           }
-          console.log(timeSlotObj)
+          timeslotJSON += JSON.stringify(timeSlotObj)
         })
         .catch((err)=>{
                throw err;
@@ -191,7 +192,7 @@ app.post("/vote", (req, res) => {
             .insert({
               participant_id : id[0],
               vote_data      : voteJSON,
-              //timeslots_id   : timeslotID
+              timeslots_id_json   : timeslotJSON
             }).then(() => {
               console.log('Success for vote data')
             })
@@ -207,29 +208,6 @@ app.post("/vote", (req, res) => {
     .catch((err)=>{
             throw err;
     })
-
-  // knex('participants')
-  //   .returning('id')
-  //   .insert({
-  //     email  : email,
-  //     name   : name
-  //   }).then((id) => {
-  //     knex('votes')
-  //       .insert({
-  //         participant_id : id[0],
-  //         vote_data      : voteJSON,
-  //         event_id       : relEventId
-  //       }).then(() => {
-  //         console.log('Success for vote data')
-  //       })
-  //       .catch((err)=>{
-  //              throw err;
-  //       })
-  //     console.log('Success for participant data')
-  //   })
-  //   .catch((err)=>{
-  //          throw err;
-  //   })
 });
 
 app.use((req, res, next) => {

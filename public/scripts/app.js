@@ -11,57 +11,81 @@ $(() => {
   let user_count = 0;
 
   $("main").on('click', '.new-part', function(e) {
-     let votelength = $("#voteslength > th").length;
-     let vote_count = 0;
-     const $button = $(this);
-     const $row = $('<tr id="rowtemplate">');
-     console.log(votelength);
+    let votelength = $("#voteslength > th").length;
+    let vote_count = 0;
+    const $button = $(this);
+    const $row = $('<tr id="rowtemplate">');
+    console.log(votelength);
 
-     let userRowTemplate = `<tr id="user_${user_count}" class="participant">
-                              <form method="POST" action="/vote" id="createVote">
-                                <td class="user">
-                                  <input name="name" type="text" placeholder="Your Name" required="required">
-                                    <br />
-                                  <input name="email" type="email" placeholder="Your Email" required="required">
-                                </td>
-                              </form>
-                            </tr>`;
+    let userRowTemplate = `<tr id="user_${user_count}" class="participant">
+                            <form method="POST" action="/vote" id="createVote">
+                              <td class="user">
+                                <input name="name" class="name" type="text" placeholder="Your Name" required="required">
+                                  <br />
+                                <input name="email" class="email" type="email" placeholder="Your Email" required="required">
+                              </td>
+                            </form>
+                          </tr>`;
 
-       let $newRow = $(userRowTemplate);
-       for(i = 0; i < votelength-1; i++){
+      let $newRow = $(userRowTemplate);
+      for(i = 0; i < votelength-1; i++){
 
-         let voteBoxTemplate = `<td class="votes">
-                                  <input type="checkbox" class="votebox" value ="${user_count}_${vote_count}">
-                                </td>`;
+        let voteBoxTemplate = `<td class="votes">
+                                <input type="checkbox" class="votebox" value ="${user_count}_${vote_count}">
+                              </td>`;
 
-         $newRow.append(voteBoxTemplate);
-         vote_count++;
-       }
-       let submitBtnTemplate = `<button type="submit" class="submit">Submit</button>`;
-       $newRow.append(submitBtnTemplate);
-       $(`table.event-table`).append($newRow);
-       user_count++;
+        $newRow.append(voteBoxTemplate);
+        vote_count++;
+      }
 
-       $('.submit').on('click', function(e) {
+      let submitBtnTemplate = `<button type="submit" class="submit">Submit</button>`;
+      $newRow.append(submitBtnTemplate);
+      $(`table.event-table`).append($newRow);
+      user_count++;
+
+      $('input[type="checkbox"]').on('click', function(e) {
+        let box = $(this);
+        let value = box.val();
+        console.log(value);
+        console.log(e);
+        console.log(box[0].checked);
+      });
+
+      $('.submit').on('click', function(e) {
         e.preventDefault();
         let formObj = {};
         let button = $(this);
-        var tds = $(this).parent().siblings();
-        // tds.forEach()
-        // let data = $("#createVote");
-        console.log(tds[1]);
-        console.log("clicked");
+        var tds = $(this).siblings();
+        var name = tds.children(".name").val();
+        var email = tds.children(".email").val();
+
+        var arr = [];
+
+        console.log(input[type="checkbox".prop('checked')]);
+
+
+
+          for(var j=0; j<votelength-1; j++){
+
+            if($(input[type="checkbox"]).prop('checked')){
+              arr.push(true);
+            } else {
+              arr.push(false);
+            }
+          }
+
+        console.log(arr);
+
+
+        console.log(name);
+        console.log(email);
         console.log(e);
         // $.post("/votes", data)
-      // if(".votebox").checked) {
-      //     $("#txtAge").show();
-      // } else {
-      //     $("#txtAge").hide();
-      // }
-      })
 
-     return e;
-   });
+    })
+
+    return e;
+  });
 
   $("main").on('click', '.new-part', function(e) {
     const $button = $(this);

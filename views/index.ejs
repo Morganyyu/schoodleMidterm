@@ -25,23 +25,23 @@
         <form method="post" action="/">
           <div>
             <div class="d-flex justify-content-center">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-user icon"></i>
               <input type="text" name="name" class="input-fields" placeholder="Your Name" required="required" maxlength="64">
             </div>
             <div class="d-flex justify-content-center">
-              <i class="far fa-envelope"></i>
+              <i class="far fa-envelope icon"></i>
               <input type="email" name="email" class="input-fields" placeholder="Enter Your Email" required="required">
             </div>
             <div class="d-flex justify-content-center">
-              <i class="far fa-lightbulb"></i>
+              <i class="far fa-lightbulb icon"></i>
               <input type="text" name="title" class="input-fields" placeholder="Enter Event Title" required="required" maxlength="64">
             </div>
             <div class="d-flex justify-content-center">
-              <i class="fas fa-location-arrow"></i>
+              <i class="fas fa-location-arrow icon"></i>
               <input type="text" name="location" class="input-fields" placeholder="Add Location(Optional)">
             </div>
             <div class="d-flex justify-content-center">
-              <i class="far fa-comment-alt"></i>
+              <i class="far fa-comment-alt icon"></i>
               <textarea type="text" name="details" class="input-fields" placeholder="Add Details(Optional)" maxlength="1000"></textarea>
             </div>
           </div>
@@ -49,8 +49,8 @@
             <div class="event-date d-flex flex-row justify-content-center">
               <div class="year p-2">
                   <i class="far fa-calendar-alt"></i>
-                  <select name="year" class="year">
-                  <option selected>Choose Year</option>
+                  <select name="year" class="year" required="required">
+                  <option selected value="">Choose Year</option>
                   <option value="2018">2018</option>
                   <option value="2019">2019</option>
                   <option value="2020">2020</option>
@@ -66,8 +66,8 @@
                 </select>
               </div>
               <div class="month p-2">
-                <select name="month" class="month">
-                  <option selected>Choose Month</option>
+                <select name="month" class="month" required="required">
+                  <option selected value="">Choose Month</option>
                   <option value="01">January</option>
                   <option value="02">February</option>
                   <option value="03">March</option>
@@ -83,8 +83,8 @@
                 </select>
               </div>
               <div class="day p-2">
-                <select name="day" class="day">
-                  <option selected>Choose Day</option>
+                <select name="day" class="day" required="required">
+                  <option selected value="">Choose Day</option>
                   <option value="01">01</option>
                   <option value="02">02</option>
                   <option value="03">03</option>
@@ -121,12 +121,12 @@
               <div class="start-time p-2">
                 <i class="far fa-clock"></i>
                 <label for="start-time">Start Time: </label>
-                <input id="start-time" type="time" name="start_time" value="00:00">
+                <input id="start-time" type="time" name="start_time" value="" required="required">
               </div>
               <div class="end-time p-2">
                 <i class="fas fa-clock"></i>
                 <label for="end-time">End Time: </label>
-                <input id="end-time" type="time" name="end_time" value="00:00">
+                <input id="end-time" type="time" name="end_time" value="" required="required">
               </div>
             </div>
           </div>
@@ -141,4 +141,3 @@
     </main>
   </body>
 </html>
-

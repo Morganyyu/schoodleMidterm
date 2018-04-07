@@ -8,6 +8,7 @@ $(() => {
     }
   });
 
+
   let user_count = 0;
 
   $("main").on('click', '.new-part', function(e) {

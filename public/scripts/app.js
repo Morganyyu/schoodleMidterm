@@ -17,14 +17,14 @@ $(() => {
     const $row = $('<tr id="rowtemplate">');
     console.log(votelength);
 
+
      let userRowTemplate = `<tr id="user_${user_count}" class="participant">
                               <form method="POST" action="/vote" id="createVote" onsubmit="submitform()">
                                 <td class="user">
-                                  <input name="name" class="name" type="text" placeholder="Your Name" required>
+                                  <input name="name" class="name" type="text" placeholder="Your Name" maxlength="64" required="required">
                                     <br />
-                                  <input name="email" class="email" type="email" placeholder="Your Email" required>
+                                  <input name="email" class="email" type="email" placeholder="Your Email" maxlength="64" required="required">
                                 </td>
-                              </form>
                             </tr>`;
 
        let $newRow = $(userRowTemplate);
@@ -37,7 +37,7 @@ $(() => {
          $newRow.append(voteBoxTemplate);
          vote_count++;
        }
-       let submitBtnTemplate = `<button type="submit" class="submit">Submit</button>`;
+       let submitBtnTemplate = `<button type="submit" class="submit">Submit</button></form>`;
        $newRow.append(submitBtnTemplate);
        $(`table.event-table`).append($newRow);
        user_count++;
@@ -50,6 +50,7 @@ $(() => {
           clickedObj[whatevVal] = whatev[0].checked
         });
 
+       // $('#createVote').validator('update');
        $('.submit').on('click', function(e) {
 
         e.preventDefault();
@@ -62,6 +63,7 @@ $(() => {
         var email = tds.children(".email").val();
         clickedObj['email'] = email
         clickedObj['name'] = name
+
 
         $.ajax({
            type: "POST",
@@ -98,36 +100,5 @@ $(() => {
     }
     console.log($button.data('enabled'));
   });
-
-
-// function renderUsers(users) {
-
-//   let createUsers;
-
-//   for(var i = 0; i < users.length; i++) {
-//     createUsers = users[i];
-//     let $element = createUserElement(createUsers);
-//     $('#userlist').prepend($element);
-//   }
-// }
-
-// function createVoteElem(vote) {
-//   // let name = req.body.name;
-//   // let email = req.body.email;
-
-//   let voteTemplate = `<tr id="user_${user_count}" class="participant">
-//                               // <form method="POST" action="/vote" id="createVote">
-//                                 <td class="user">
-//                                   <>
-//                                     <br />
-//                                   <input name="email" type="email" placeholder="Your Email" required="required">
-//                                 </td>
-//                               // </form>
-//                             </tr>`;
-
-// }
-
-
-
 
 });

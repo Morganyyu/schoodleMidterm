@@ -11,18 +11,18 @@ $(() => {
   let user_count = 0;
 
   $("main").on('click', '.new-part', function(e) {
-     let votelength = $("#voteslength > th").length;
-     let vote_count = 0;
-     const $button = $(this);
-     const $row = $('<tr id="rowtemplate">');
-     console.log(votelength);
+    let votelength = $("#voteslength > th").length;
+    let vote_count = 0;
+    const $button = $(this);
+    const $row = $('<tr id="rowtemplate">');
+    console.log(votelength);
 
      let userRowTemplate = `<tr id="user_${user_count}" class="participant">
-                              <form method="POST" action="/vote" id="createVote">
+                              <form method="POST" action="/vote" id="createVote" onsubmit="submitform()">
                                 <td class="user">
-                                  <input name="name" class="name" type="text" placeholder="Your Name" value="" required="required">
+                                  <input name="name" class="name" type="text" placeholder="Your Name" required>
                                     <br />
-                                  <input name="email" class="email" type="email" placeholder="Your Email" value="" required="required">
+                                  <input name="email" class="email" type="email" placeholder="Your Email" required>
                                 </td>
                               </form>
                             </tr>`;

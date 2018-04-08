@@ -30,11 +30,17 @@
         <% for(i = 0; i < startSlotsArray.length; i++){ %>
           <th><%= startSlotsArray[i].toString().slice(0, 21) %> to <%= endSlotsArray[i].toString().slice(0, 21)%></th>
         <% } %>
-        <th><%=vote_data%></th>
       </tr>
       <tr class="new">
         <td class="new-part">New Participant <i class="fas fa-user-plus icon"></i></td>
       </tr>
+      <div class=“all-users”>
+        <% for (i = 0; i < vote_data.length; i++) { %>
+        <tr class=“add-new”>
+          <td><%= vote_data[i].vote_data.name %> <br /> <%= vote_data[i].vote_data.email %></td>
+        </tr>
+        <% } %>
+      </div>
     </table>
   </main>
   </body>

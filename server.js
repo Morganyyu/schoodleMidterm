@@ -99,7 +99,9 @@ app.get("/:id", (req, res, next) => {
                       parsedVotes.push(element)
                     })
                     templatevars.vote_data = parsedVotes
-                    console.log(parsedVotes)
+                    console.log('This is parsedvotes ' + JSON.stringify(parsedVotes))
+                    oururl = req.params.id
+                    console.log('this is get/:id oururl ' + oururl)
                     res.render("events", templatevars);
                   } else {
                     next()
@@ -183,10 +185,12 @@ app.post("/vote", (req, res) => {
   var name = req.body.name
   var relEventId = 0
   var timeslotJSON = ''
+  console.log('this is oururl ' + oururl)
   knex.select('id').from('events')
     // .returning('id')
     .where("event_url", oururl)
     .then(function(event) {
+    console.log(event)
     relEventId += event[0].id;
     console.log(relEventId)
     console.log('this is relEventId ' + relEventId)

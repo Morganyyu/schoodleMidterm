@@ -52,9 +52,9 @@ $(() => {
           clickedObj[whatevVal] = whatev[0].checked
         });
 
-       // $('#createVote').validator('update');
-       $('.submit').on('click', function(e) {
 
+
+        $('.submit').on('click', function(e) {
         e.preventDefault();
         console.log(clickedObj)
         //you have to vote for something in order to submit, protest votes don't count!
@@ -85,21 +85,51 @@ $(() => {
        return e;
     });
 
-  $("main").on('click', '.new-part', function(e) {
-    const $button = $(this);
-    const $tr = $(this).parents('tr');
+        $(".user").on('click', function(e) {
+        const $votebox = $(this).siblings().children("input[type=checkbox]");
+        console.log($votebox);
+        let submitBtnTemplate = `<button type="submit" class="submit">Submit</button></form>`;
+        $($votebox).removeAttr("disabled");
+        $(this).parent(".add-new").append(submitBtnTemplate);
 
-    if($button.data('enabled')) {
-      $button.data('enabled', true);
+        let clickedObj = {}
 
-      $button.css("font-weight","bold");
-      $tr.find('input').prop('disabled', '');
-    } else {
-      $button.data('enabled', true);
-      $button.css("font-weight","normal");
-      $tr.find('input').prop('disabled', 'disabled');
-    }
-    console.log($button.data('enabled'));
+       $( "input[type=checkbox]" ).on( "click", function(x) {
+          let whatev = $(this)
+          let whatevVal = whatev.val()
+          clickedObj[whatevVal] = whatev[0].checked
+        });
+
+
+
+        $('.submit').on('click', function(e) {
+        e.preventDefault();
+        console.log(clickedObj)
+        //you have to vote for something in order to submit, protest votes don't count!
+        let formObj = {};
+        let button = $(this);
+        var tds = $(this).siblings();
+        var name = tds.children(".name").val();
+        var email = tds.children(".email").val();
+        clickedObj['email'] = email
+        clickedObj['name'] = name
+
+
+        $.ajax({
+           type: "POST",
+           url: "/vote",
+           dataType: "json",
+           success: function (msg) {
+               if (msg) {
+                   alert("It worked! How lit!");
+                   location.reload(true);
+               } else {
+                   alert("Not lit fam :(");
+               }
+           },
+           data: clickedObj
+       });
+      })
   });
 
 });

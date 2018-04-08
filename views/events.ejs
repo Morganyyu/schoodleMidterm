@@ -37,19 +37,19 @@
             <td class="new-part">New Participant <i class="fas fa-user-plus icon"></i></td>
           </tr>
             <% for (i = 0; i < vote_data.length; i++) { %>
-            <tr class=“add-new”>
+            <tr class="add-new">
               <td class="user"><%= vote_data[i].vote_data.name %> <br /> <%= vote_data[i].vote_data.email %><i class="fas fa-edit icon"></i></td>
-              <% for(x = 0; x < vote_data.length; x++){ %>
-                <% for (var item in vote_data[i].vote_data) { %>
-                  <% if (vote_data[i].vote_data.item === "true") { %>
-                    <th><input type="checkbox" class="votebox" value="true" checked disabled="disabled"></th>
-                    <% } else { %>
-                    <th><input type="checkbox" class="votebox" value="false" disabled="disabled"></th>
-                  <% } %>
-                <% } %>
-              <% } %>
-            </tr>
-            <% } %>
+              <% for (var item in vote_data[i].vote_data) { %>
+                 <% if (vote_data[i].vote_data[item] === "true") { %>
+                   <td><input type="checkbox" class="votebox" value="true" checked disabled="disabled"></td>
+                   <% console.log(vote_data) %>
+                 <% } else if (vote_data[i].vote_data[item] !== typeof String) { %>
+                   <% console.log(vote_data) %>
+                   <td><input type="checkbox" class="votebox" value="false"></td>
+               <% } %>
+             <% } %>
+             </tr>
+             <% } %>
         </table>
     </div>
   </main>

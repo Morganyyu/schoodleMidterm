@@ -89,7 +89,12 @@ app.get("/:id", (req, res, next) => {
                 .then((vote_data) => {
                   //tUiCzJ8TX2
                   if(vote_data){
-                    templatevars.vote_data = vote_data
+                    var parsedVotes = []
+                    vote_data.forEach(function(element, index){
+                      parsedVotes.push(element)
+                    })
+                    templatevars.vote_data = parsedVotes
+                    console.log(parsedVotes)
                     res.render("events", templatevars);
                   } else {
                     next()

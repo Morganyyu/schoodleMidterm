@@ -30,7 +30,7 @@
         <% for(i = 0; i < startSlotsArray.length; i++){ %>
           <th><%= startSlotsArray[i].toString().slice(0, 21) %> to <%= endSlotsArray[i].toString().slice(0, 21)%></th>
         <% } %>
-        <th></th>
+        <th><%=vote_data%></th>
       </tr>
       <tr class="new">
         <td class="new-part">New Participant <i class="fas fa-user-plus icon"></i></td>

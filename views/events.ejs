@@ -26,9 +26,11 @@
         <p>Details: <%=details%></p>
           <table class="event-table">
           <tr id="voteslength">
+          <% var limit = 0 %>
             <th>Vote for the Times That Your Prefer</th>
             <% for(i = 0; i < startSlotsArray.length; i++){ %>
               <th><%= startSlotsArray[i].toString().slice(0, 21) %> <br /> to <br /> <%= endSlotsArray[i].toString().slice(0, 21)%></th>
+              <%limit = startSlotsArray.length%>
             <% } %>
           </tr>
           <tr class="new">
@@ -38,6 +40,10 @@
             <% for (i = 0; i < vote_data.length; i++) { %>
             <tr class=“add-new”>
               <td class="user"><%= vote_data[i].vote_data.name %> <br /> <%= vote_data[i].vote_data.email %><i class="fas fa-edit icon"></i></td>
+              <% for(x = 0; x < startSlotsArray.length; x++){ %>
+                <th><input type="checkbox" class="votebox" value="false"></th>
+              <%limit = startSlotsArray.length%>
+            <% } %>
             </tr>
             <% } %>
           </div>

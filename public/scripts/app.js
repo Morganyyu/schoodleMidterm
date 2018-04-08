@@ -14,7 +14,10 @@ $(() => {
     let vote_count = 0;
     const $button = $(this);
     const $row = $('<tr id="rowtemplate">');
-    console.log(votelength);
+    var $pastUsers = $('.user').length
+    if($pastUsers){
+      user_count = $pastUsers
+    };
 
 
      let userRowTemplate = `<tr id="user_${user_count}" class="participant">
@@ -53,7 +56,6 @@ $(() => {
        $('.submit').on('click', function(e) {
 
         e.preventDefault();
-        console.log('this should be event id ' + event.id)
         console.log(clickedObj)
         //you have to vote for something in order to submit, protest votes don't count!
         let formObj = {};

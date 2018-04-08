@@ -36,17 +36,14 @@
           <tr class="new">
             <td class="new-part">New Participant <i class="fas fa-user-plus icon"></i></td>
           </tr>
-          <div class=“all-users”>
-            <% for (i = 0; i < vote_data.length; i++) { %>
-            <tr class=“add-new”>
-              <td class="user"><%= vote_data[i].vote_data.name %> <br /> <%= vote_data[i].vote_data.email %><i class="fas fa-edit icon"></i></td>
+          <% for (i = 0; i < vote_data.length; i++) { %>
+          <tr class=“add-new”>
+            <td class="user"><%= vote_data[i].vote_data.name %> <br /> <%= vote_data[i].vote_data.email %><i class="fas fa-edit icon"></i></td>
               <% for(x = 0; x < startSlotsArray.length; x++){ %>
-                <th><input type="checkbox" class="votebox" value="false"></th>
-              <%limit = startSlotsArray.length%>
+              <th><input type="checkbox" class="votebox" value="false"></th>
             <% } %>
-            </tr>
-            <% } %>
-          </div>
+          </tr>
+          <% } %>
         </table>
     </div>
   </main>

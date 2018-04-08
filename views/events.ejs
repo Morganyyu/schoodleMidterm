@@ -37,21 +37,21 @@
             <td class="new-part">New Participant <i class="fas fa-user-plus icon"></i></td>
           </tr>
           <% for (i = 0; i < vote_data.length; i++) { %>
-          <tr class=“add-new”>
+          <tr class="add-new">
             <td class="user"><%= vote_data[i].vote_data.name %> <br /> <%= vote_data[i].vote_data.email %><i class="fas fa-edit icon"></i></td>
 
             <% for(x = 0; x < startSlotsArray.length; x++){ %>
 
                 <% for(var item in vote_data[i].vote_data) { %>
                 <%if (item[2] !== 'a' && item[2] !== 'm' && vote_data[i].vote_data[item] === 'true' && x === Number(item[2])){ %>
-                  <th><input type="checkbox" class="votebox" value="true" checked></th>
+                  <th><input type="checkbox" class="votebox" value="true" checked disabled="disabled"></th>
                   <%x++%>
                 <% } %>
 
 
               <% } %>
               <%if (x !== startSlotsArray.length){%>
-              <th><input type="checkbox" class="votebox" value="true" ></th>
+              <th><input type="checkbox" class="votebox" value="true" disabled="disabled"></th>
               <% } %>
             <% } %>
           </tr>

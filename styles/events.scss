@@ -37,6 +37,10 @@ nav {
   }
 }
 
+main {
+  padding-right: 150px;
+  padding-left: 150px;
+}
 
 body {
   background-color: $second;
@@ -45,10 +49,16 @@ body {
 
 body h1 {
   font-size: 50px;
-  color: #244751;
+  color: $forth;
   text-align:center;
 }
 
+.event-background {
+  background-color: #181027;
+  color: white;
+  margin-top: 20px;
+  padding: 20px;
+}
 
 .div-class {
   height: 50px;
@@ -60,15 +70,16 @@ body h1 {
 .event-table {
   margin-left: auto;
   margin-right: auto;
-  width: 30%;
+  width: 60%;
   background: rgb(34,193,195);
   background: radial-gradient(circle, rgba(34,193,195,1) 0%, rgba(148,187,233,1) 100%);
   opacity: 80%;
 
   td, th {
     border: 1px solid grey;
-    width: 50px;
+    width: 60px;
     padding: 15px;
+    height: 40px;
   }
   td:first-child, th:first-child {
     border-radius: 5px;

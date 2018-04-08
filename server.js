@@ -55,14 +55,17 @@ app.get("/", (req, res) => {
   var randonmun = generateRandomString();
 });
 
-let oururl = generateRandomString();
+let oururl = ''
 
 app.get("/:id", (req, res, next) => {
   let templatevars = {}
     knex('events')
       .first("event_name","details","sched_name","id")
-      .where("event_url" , req.params.id )
+      .where({
+        "event_url" : req.params.id,
+      })
       .then((event) => {
+        console.log('got to line 66')
         if(event){
           templatevars = {
             name     :  event.sched_name,
@@ -74,6 +77,7 @@ app.get("/:id", (req, res, next) => {
             .select("start_time","end_time")
             .where("event_id", event.id)
             .then((timeslot) => {
+              console.log('got to line 78')
               if(timeslot){
                 var startSlotsArray = []
                 var endSlotsArray = []
@@ -87,6 +91,7 @@ app.get("/:id", (req, res, next) => {
                 .select("vote_data")
                 .where("event_id", event.id)
                 .then((vote_data) => {
+                  console.log('got to line 92')
                   //tUiCzJ8TX2
                   if(vote_data){
                     var parsedVotes = []
@@ -111,7 +116,7 @@ app.get("/:id", (req, res, next) => {
 });
 
 app.post("/", (req, res) => {
-	//let oururl = generateRandomString();
+  let oururl = generateRandomString()
   var yearArray = req.body.year;
   var monthArray = req.body.month;
   var dayArray = req.body.day;
@@ -173,16 +178,17 @@ app.post("/", (req, res) => {
 app.post("/vote", (req, res) => {
   console.log('endpoint hit')
   var voteJSON = JSON.stringify(req.body)
+  console.log('This is Vote JSON ' + voteJSON)
   var email = req.body.email
   var name = req.body.name
   var relEventId = 0
   var timeslotJSON = ''
-  console.log(oururl)
   knex.select('id').from('events')
     // .returning('id')
     .where("event_url", oururl)
     .then(function(event) {
     relEventId += event[0].id;
+    console.log(relEventId)
     console.log('this is relEventId ' + relEventId)
     //console.log(id[0])
       knex('timeslots')

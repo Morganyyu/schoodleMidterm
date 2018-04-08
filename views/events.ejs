@@ -34,6 +34,13 @@
       <tr class="new">
         <td class="new-part">New Participant <i class="fas fa-user-plus icon"></i></td>
       </tr>
+      <div class=“all-users”>
+        <% for (i = 0; i < vote_data.length; i++) { %>
+        <tr class=“add-new”>
+          <td><%= vote_data[i].vote_data.name %> <br /> <%= vote_data[i].vote_data.email %></td>
+        </tr>
+        <% } %>
+      </div>
     </table>
   </main>
   </body>

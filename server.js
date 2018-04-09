@@ -96,6 +96,9 @@ app.get("/:id", (req, res, next) => {
                   if(vote_data){
                     var parsedVotes = []
                     vote_data.forEach(function(element, index){
+                      for (var key in element.vote_data) {
+                        console.log(key);
+                      }
                       parsedVotes.push(element)
                     })
                     templatevars.vote_data = parsedVotes
@@ -302,3 +305,4 @@ app.use((req, res, next) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
+

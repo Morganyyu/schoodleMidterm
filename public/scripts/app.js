@@ -93,6 +93,10 @@ $(() => {
 
         $(".user").on('click', function(e) {
         const $votebox = $(this).siblings().children("input[type=checkbox]");
+        var name = $(this).children(".username").html();
+        var email = $(this).children(".useremail").html();
+        console.log(name)
+        console.log(email)
         console.log($votebox);
         let submitBtnTemplate = `<button type="submit" class="update">Update</button></form>`;
         $($votebox).removeAttr("disabled");
@@ -105,6 +109,8 @@ $(() => {
           console.log('whatev ' + JSON.stringify(whatev))
           console.log('whatevVal ' + whatevVal)
           clickedObj[whatevVal] = whatev[0].checked
+          clickedObj['email'] = email
+          clickedObj['name'] = name
           console.log('This is clickedObj ' + JSON.stringify(clickedObj))
         });
 

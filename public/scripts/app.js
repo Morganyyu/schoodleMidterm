@@ -9,6 +9,7 @@ $(() => {
 
   let user_count = 0;
   let votelength = 0;
+  var clickedObj = {};
 
   $("main").on('click', '.new-part', function(e) {
     let votelength = $("#voteslength > th").length;
@@ -46,7 +47,6 @@ $(() => {
        $(`table.event-table`).append($newRow);
        user_count++;
 
-      let clickedObj = {}
       var row = user_count - 1
           var spot = votelength - 1
           for (i = 0; i < spot; i++){
@@ -94,35 +94,35 @@ $(() => {
         $(".user").on('click', function(e) {
         const $votebox = $(this).siblings().children("input[type=checkbox]");
         console.log($votebox);
-        let submitBtnTemplate = `<button type="submit" class="submit">Submit</button></form>`;
+        let submitBtnTemplate = `<button type="submit" class="update">Update</button></form>`;
         $($votebox).removeAttr("disabled");
         $(this).parent(".add-new").append(submitBtnTemplate);
 
-        let clickedObj = {}
 
        $( "input[type=checkbox]" ).on( "click", function(x) {
           let whatev = $(this)
           let whatevVal = whatev.val()
-          console.log('This is clickedObj ' + JSON.stringify(clickedObj))
           console.log('whatev ' + JSON.stringify(whatev))
           console.log('whatevVal ' + whatevVal)
           clickedObj[whatevVal] = whatev[0].checked
+          console.log('This is clickedObj ' + JSON.stringify(clickedObj))
         });
 
 
 
-        $('.sumbit').on('click', '.user', function(e) {
+
+        $('.update').on('click', function(e) {
+
         e.preventDefault();
-        console.log(clickedObj)
-        //you have to vote for something in order to submit, protest votes don't count!
-        let formObj = {};
+        console.log('THIS SHOULD BE LOGGING CLICKED OBJECT ' + JSON.stringify(clickedObj))
+
         let button = $(this);
         var tds = $(this).siblings();
 
 
         $.ajax({
-           type: "POST",
-           url: "/vote",
+           type: "PUT",
+           url: "/update",
            dataType: "json",
            success: function (msg) {
                if (msg) {

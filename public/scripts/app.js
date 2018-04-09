@@ -42,7 +42,7 @@ $(() => {
          vote_count++;
        }
 
-       let submitBtnTemplate = `<button type="submit" class="submit">Submit</button></form>`;
+       let submitBtnTemplate = `<button type="submit" class="submit"><span class="submitting">Submit</span></button></form>`;
        $newRow.append(submitBtnTemplate);
        $(`table.event-table`).append($newRow);
        user_count++;
@@ -99,7 +99,7 @@ $(() => {
         console.log(name)
         console.log(email)
         console.log($votebox);
-        let submitBtnTemplate = `<button type="submit" class="update">Update</button></form>`;
+        let submitBtnTemplate = `<button type="submit" class="update"><span class="updating">Update<span></button></form>`;
         $($votebox).removeAttr("disabled");
         $(this).parent(".add-new").append(submitBtnTemplate);
 

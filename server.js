@@ -181,14 +181,11 @@ app.post("/", (req, res) => {
 });
 
 app.put("/update", (req, res) => {
-  console.log('put endpoint hit')
   var voteJSON = JSON.stringify(req.body)
-  console.log('This is Vote JSON ' + voteJSON)
   var email = req.body.email
   var name = req.body.name
   var relEventId = 0
   var timeslotJSON = ''
-  console.log('this is oururl ' + oururl)
   knex.select('id').from('events')
     // .returning('id')
     .where("event_url", oururl)
@@ -204,19 +201,6 @@ app.put("/update", (req, res) => {
   .catch((err)=>{
             throw err;
     })
-      knex('timeslots')
-        .returning('id')
-        .where("event_id", relEventId)
-        .then((timeslotID) => {
-          var timeSlotObj = {}
-          for (i = 0; i < timeslotID.length; i++){
-            timeSlotObj[i] = timeslotID[i]['id']
-          }
-          timeslotJSON += JSON.stringify(timeSlotObj)
-        })
-        .catch((err)=>{
-               throw err;
-        })
       knex('participants')
         .returning('id')
         .insert({
@@ -263,20 +247,6 @@ app.post("/vote", (req, res) => {
     relEventId += event[0].id;
     console.log(relEventId)
     console.log('this is relEventId ' + relEventId)
-    //console.log(id[0])
-      knex('timeslots')
-        .returning('id')
-        .where("event_id", relEventId)
-        .then((timeslotID) => {
-          var timeSlotObj = {}
-          for (i = 0; i < timeslotID.length; i++){
-            timeSlotObj[i] = timeslotID[i]['id']
-          }
-          timeslotJSON += JSON.stringify(timeSlotObj)
-        })
-        .catch((err)=>{
-               throw err;
-        })
       knex('participants')
         .returning('id')
         .insert({

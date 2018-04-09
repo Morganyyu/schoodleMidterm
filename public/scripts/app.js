@@ -8,6 +8,7 @@ $(() => {
 
 
   let user_count = 0;
+  let votelength = 0;
 
   $("main").on('click', '.new-part', function(e) {
     let votelength = $("#voteslength > th").length;
@@ -45,6 +46,11 @@ $(() => {
        user_count++;
 
       let clickedObj = {}
+      var row = user_count - 1
+          var spot = votelength - 1
+          for (i = 0; i < spot; i++){
+            clickedObj[(row + '_' + i)] = false
+          }
 
        $( "input[type=checkbox]" ).on( "click", function(x) {
           let whatev = $(this)
@@ -58,7 +64,6 @@ $(() => {
         e.preventDefault();
         console.log(clickedObj)
         //you have to vote for something in order to submit, protest votes don't count!
-        let formObj = {};
         let button = $(this);
         var tds = $(this).siblings();
         var name = tds.children(".name").val();
@@ -97,22 +102,21 @@ $(() => {
        $( "input[type=checkbox]" ).on( "click", function(x) {
           let whatev = $(this)
           let whatevVal = whatev.val()
+          console.log('This is clickedObj ' + JSON.stringify(clickedObj))
+          console.log('whatev ' + JSON.stringify(whatev))
+          console.log('whatevVal ' + whatevVal)
           clickedObj[whatevVal] = whatev[0].checked
         });
 
 
 
-        $('.submit').on('click', function(e) {
+        $('main').on('click', '.user', function(e) {
         e.preventDefault();
         console.log(clickedObj)
         //you have to vote for something in order to submit, protest votes don't count!
         let formObj = {};
         let button = $(this);
         var tds = $(this).siblings();
-        var name = tds.children(".name").val();
-        var email = tds.children(".email").val();
-        clickedObj['email'] = email
-        clickedObj['name'] = name
 
 
         $.ajax({

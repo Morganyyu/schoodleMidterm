@@ -44,14 +44,15 @@
 
                 <% for(var item in vote_data[i].vote_data) { %>
                 <%if (item[2] !== 'a' && item[2] !== 'm' && vote_data[i].vote_data[item] === 'true' && x === Number(item[2])){ %>
-                  <th><input type="checkbox" class="votebox" value="true" checked disabled="disabled"></th>
+                <%=item%>
+                  <th><input type="checkbox" class="votebox" checked disabled="disabled" value=<%=item%> </th>
                   <%x++%>
                 <% } %>
 
 
               <% } %>
               <%if (x !== startSlotsArray.length){%>
-              <th><input type="checkbox" class="votebox" value="true" disabled="disabled"></th>
+              <th><input type="checkbox" class="votebox" disabled="disabled" value=<%=vote_data[i].vote_data%> ></th>
               <% } %>
             <% } %>
           </tr>

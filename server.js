@@ -230,6 +230,7 @@ app.put("/update", (req, res) => {
               event_id       : relEventId
             }).then(() => {
               console.log('Success for vote data')
+              res.redirect(`/${oururl}`)
             })
             .catch((err)=>{
                    throw err;
@@ -289,6 +290,7 @@ app.post("/vote", (req, res) => {
               event_id       : relEventId
             }).then(() => {
               console.log('Success for vote data')
+              res.redirect(`/${oururl}`)
             })
             .catch((err)=>{
                    throw err;

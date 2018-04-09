@@ -87,6 +87,7 @@ $(() => {
            },
            data: clickedObj
        });
+        window.location.reload()
       })
        return e;
     });
@@ -140,6 +141,7 @@ $(() => {
            },
            data: clickedObj
        });
+        window.location.reload()
       })
   });
 

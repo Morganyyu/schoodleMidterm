@@ -40,6 +40,7 @@ $(() => {
          $newRow.append(voteBoxTemplate);
          vote_count++;
        }
+
        let submitBtnTemplate = `<button type="submit" class="submit">Submit</button></form>`;
        $newRow.append(submitBtnTemplate);
        $(`table.event-table`).append($newRow);
@@ -110,7 +111,7 @@ $(() => {
 
 
 
-        $('main').on('click', '.user', function(e) {
+        $('.sumbit').on('click', '.user', function(e) {
         e.preventDefault();
         console.log(clickedObj)
         //you have to vote for something in order to submit, protest votes don't count!

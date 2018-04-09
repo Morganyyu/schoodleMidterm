@@ -198,6 +198,12 @@ app.put("/update", (req, res) => {
     console.log(relEventId)
     console.log('this is relEventId ' + relEventId)
     //console.log(id[0])
+    knex('votes')
+    .where('event_id', relEventId)
+    .del()
+  .catch((err)=>{
+            throw err;
+    })
       knex('timeslots')
         .returning('id')
         .where("event_id", relEventId)

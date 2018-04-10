@@ -47,8 +47,8 @@ $(() => {
        $(`table.event-table`).append($newRow);
        user_count++;
 
-      var row = user_count - 1
-          var spot = votelength - 1
+        var row = user_count - 1
+        var spot = votelength - 1
           for (i = 0; i < spot; i++){
             clickedObj[(row + '_' + i)] = false
           }
@@ -96,12 +96,20 @@ $(() => {
         const $votebox = $(this).siblings().children("input[type=checkbox]");
         var name = $(this).children(".username").html();
         var email = $(this).children(".useremail").html();
+        var row = $votebox
         console.log(name)
         console.log(email)
         console.log($votebox);
         let submitBtnTemplate = `<button type="submit" class="update"><span class="updating">Update<span></button></form>`;
         $($votebox).removeAttr("disabled");
+        $($votebox).removeAttr("checked")
         $(this).parent(".add-new").append(submitBtnTemplate);
+        var columns = $votebox.length
+        var row = $(this).siblings().children("input[type=checkbox]").val()[0]
+        for (i = 0; i < columns; i++){
+            clickedObj[(row + '_' + i)] = false
+          }
+
 
 
        $( "input[type=checkbox]" ).on( "click", function(x) {
@@ -109,10 +117,18 @@ $(() => {
           let whatevVal = whatev.val()
           console.log('whatev ' + JSON.stringify(whatev))
           console.log('whatevVal ' + whatevVal)
+          console.log('row of whatevval ' + whatevVal[0])
+          var row = whatevVal[0]
+          var spot = $votebox.length
+          console.log('this is spot ' + spot)
+          console.log('clickedObj after for loop all should be false ' + JSON.stringify(clickedObj))
           clickedObj[whatevVal] = whatev[0].checked
           clickedObj['email'] = email
           clickedObj['name'] = name
           console.log('This is clickedObj ' + JSON.stringify(clickedObj))
+          // for (i = 0; i < spot; i++){
+          //   clickedObj[(row + '_' + i)] = whatev[0].checked
+          // }
         });
 
 

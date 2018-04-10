@@ -183,51 +183,128 @@ app.post("/", (req, res) => {
 app.put("/update", (req, res) => {
   var voteJSON = JSON.stringify(req.body)
   var email = req.body.email
+  console.log('email in update ' + email)
   var name = req.body.name
   var relEventId = 0
+  var relParticipantId = 0
   var timeslotJSON = ''
-  knex.select('id').from('events')
-    // .returning('id')
+  //this defines the current event id as variable rel Event ID must happen first as next promise relies on this one
+  knex('events')
+    .select('id')
     .where("event_url", oururl)
     .then(function(event) {
-    console.log(event)
-    relEventId += event[0].id;
-    console.log(relEventId)
-    console.log('this is relEventId ' + relEventId)
-    //console.log(id[0])
-    knex('votes')
-    .where('event_id', relEventId)
-    .del()
-  .catch((err)=>{
-            throw err;
-    })
-      knex('participants')
-        .returning('id')
-        .insert({
-          email  : email,
-          name   : name
-        }).then((id) => {
+      relEventId += event[0].id;
+      console.log('this is relEventId ' + relEventId);
+      knex('votes')
+        .select('*')
+        .returning('vote_data')
+        .where({
+          event_id : relEventId
+        })
+        .then((vote_data) => {
+          for (i = 0; i < vote_data.length; i++){
+            if (vote_data[i]['vote_data']['email'] === email){
+              relParticipantId += vote_data[i]['participant_id']
+            }
+          }
           knex('votes')
-            .insert({
-              participant_id : id[0],
-              vote_data      : voteJSON,
-              event_id       : relEventId
-            }).then(() => {
-              console.log('Success for vote data')
-              res.redirect(`/${oururl}`)
+            .select('*')
+            .where({
+              event_id        : relEventId,
+              participant_id  : relParticipantId
+              })
+            .del()
+            .then(() =>{
+                knex('votes')
+                .insert({
+                  event_id        : relEventId,
+                  participant_id  : relParticipantId,
+                  vote_data       : voteJSON
+                })
+                .catch((err) => {
+                  throw err;
+                })
             })
-            .catch((err)=>{
-                   throw err;
+            .catch((err) => {
+              throw err;
             })
-          console.log('Success for participant data')
+          })
+        .catch((err) => {
+          throw err;
         })
-        .catch((err)=>{
-               throw err;
-        })
+      })
+    .catch((err) => {
+      throw err;
     })
-    .catch((err)=>{
-            throw err;
-    })
+
+  // knex('participants')
+  //   .returning('id')
+  //   .select('*')
+  //   .where({
+  //     email    : 'email'
+  //   })
+  //   .then((id) => {
+  //     console.log('This is the participant id ' + JSON.stringify(id))
+  //   })
+  // knex.select('id').from('events')
+  //   // .returning('id')
+  //   .where("event_url", oururl)
+  //   .then(function(event) {
+  //   console.log(event)
+  //   relEventId += event[0].id;
+  //   console.log(relEventId)
+  //   console.log('this is relEventId ' + relEventId)
+  //   //console.log(id[0])
+  //   knex('votes')
+  //       .returning('id')
+  //       .select('id')
+  //       .where('event_id', relEventId)
+  //       .then((id) => {
+  //   knex('participants')
+  //     console.log('This is where we should have id of current event ' + id)
+  //     .returning('id')
+  //     .select('*')
+  //     .where({
+  //       email    : email,
+  //       name     : name,
+  //     })
+  //     .then((id) => {
+  //       console.log('it worked I guess? here is what should be the id from participants ' + JSON.stringify(id))
+  //       knex('votes')
+  //           .where('participant_id', id[0])
+  //           .insert({
+  //             participant_id : id[0][0],
+  //             vote_data      : voteJSON,
+  //             event_id       : relEventId
+  //           }).then(() => {
+  //             console.log('Success for vote data')
+  //             res.redirect(`/${oururl}`)
+  //           })
+  //           .catch((err)=>{
+  //                  throw err;
+  //           })
+  //     })
+  //     .catch((err)=>{
+  //           throw err;
+  //    })
+  //     .catch((err)=>{
+  //           throw err;
+  //    })
+  //     // knex('participants')
+  //     //   .returning('id')
+  //     //   .insert({
+  //     //     email  : email,
+  //     //     name   : name
+  //     //   }).then((id) => {
+  //         console.log('Success for participant data')
+  //       })
+  //       .catch((err)=>{
+  //              throw err;
+  //       })
+  //   })
+  //   .catch((err)=>{
+  //           throw err;
+  //   })
 });
 
 app.post("/vote", (req, res) => {

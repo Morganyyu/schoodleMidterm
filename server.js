@@ -221,11 +221,17 @@ app.put("/update", (req, res) => {
                   participant_id  : relParticipantId,
                   vote_data       : voteJSON
                 })
+                .then(() =>{
+                  res.redirect(`/${oururl}`)
+                })
+                .catch((err) => {
+                  throw err;
+                })
                 .catch((err) => {
                   throw err;
                 })
             })
-            .catch((err) => {
+            .catc h((err) => {
               throw err;
             })
           })
